@@ -3,3 +3,8 @@
 
 # Ignore the .env file which contains sensitive information
 .env
+
+# Ignore the outputs
+*.svg
+*.png
+R/*.pdf
