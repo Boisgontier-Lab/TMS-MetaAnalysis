@@ -1,0 +1,5 @@
+# Ignore the .DS_Store file which is created by macOS
+.DS_Store
+
+# Ignore the .env file which contains sensitive information
+.env
