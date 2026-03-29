@@ -19,8 +19,6 @@ body{
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-readRenviron(".env")
-Sys.setenv(GITHUB_TOKEN = Sys.getenv("GITHUB_TOKEN"))
 installed.packages()[, c("Package", "Version")]
 ```
 
