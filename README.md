@@ -1,5 +1,5 @@
 # TMS-MetaAnalysis
-**Authors:** Ata Farajzadeh, Kayne Park, Timothée Dumas, Ian M. Lahart, Anthony N. Carlsen, Matthieu P. Boisgontier
+**Authors:** Ata Farajzadeh, Ian M. Lahart, Matthieu P. Boisgontier
 
 **Contacts:** ata.farajzadeh@uottawa.ca, matthieu.boisgontier@uottawa.ca
 
