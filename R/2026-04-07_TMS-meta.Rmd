@@ -1,0 +1,879 @@
+---
+title: "Meta-Analysis_TMS_Physical_Activity"
+author: "IM Lahart, A Farajzadeh, MP Boisgontier"
+date: "`r format(Sys.Date(),'%e de %B, %Y')`"
+output:
+  pdf_document:
+    latex_engine: xelatex
+    toc: yes
+    toc_depth: 3
+---
+<style>
+body{
+  font-size: 8pt;
+}
+</style>
+---
+
+# R Markdown file set-up and packages
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Packages required:
+1) dmetar
+2) tidyverse
+3) meta
+4) metafor
+5) esc
+6) TOSTER
+
+
+```{r install and load dmetar, include=FALSE}
+if (!require("devtools")) {
+  install.packages("devtools")
+}
+devtools::install_github("MathiasHarrer/dmetar")
+library(dmetar)
+```
+
+```{r packages, include=FALSE}
+#Install tidyverse package if needed for 'glimpse'
+if(!require(tidyverse)){install.packages('tidyverse')}
+#Load tidyverse package
+library(tidyverse)
+
+#Install meta package if needed for meta-analysis
+if(!require(meta)){install.packages('meta')}
+#Load meta package
+library(meta)
+
+#Install metafor package if needed for meta-analysis
+if(!require(metafor)){install.packages('metafor')}
+#Load metfor package
+library(metafor)
+
+#Install esc package if needed for Fisher z conversion to r
+if(!require(esc)){install.packages('esc')}
+#Load esc package
+library(esc)
+
+#Install TOSTER package if needed for equivalence testing
+if(!require(TOSTER)){install.packages('TOSTER')}
+#Load TOSTER package
+library(TOSTER)
+
+#Install svglite package if needed for svg output
+if(!require(svglite)){install.packages('svglite')}
+#Load svglite package
+library(svglite)
+
+```
+
+
+# Meta-analysis
+# Import Pearson r data
+```{r import data files, include=FALSE}
+excitability_r  <- read.csv("excitability_r.csv",  header = TRUE, sep = ",")
+inhibition_r <- read.csv("inhibition_r.csv", header = TRUE, sep = ",")
+facilitation_r <- read.csv("facilitation_r.csv", header = TRUE, sep = ",")
+```
+
+# Data file glimpse
+```{r glimpse, include=FALSE}
+glimpse(excitability_r)
+glimpse(inhibition_r)
+glimpse(facilitation_r)
+```
+
+# Calculating z and var.z 
+```{r z and var.z calculation, include=FALSE}
+excitability_r$z <- atanh(excitability_r$cor)
+excitability_r$var.z <- 1/(excitability_r$n - 3)
+excitability_r$cor_id <- 1:nrow(excitability_r)
+write.csv(excitability_r, "excitability_r.csv", row.names = FALSE)
+unique(excitability_r)
+
+inhibition_r$z <- atanh(inhibition_r$cor)
+inhibition_r$var.z <- 1/(inhibition_r$n - 3)
+inhibition_r$cor_id <- 1:nrow(inhibition_r)
+write.csv(inhibition_r, "inhibition_r.csv", row.names = FALSE)
+unique(inhibition_r)
+
+facilitation_r$z <- atanh(facilitation_r$cor)
+facilitation_r$var.z <- 1/(facilitation_r$n - 3)
+facilitation_r$cor_id <- 1:nrow(facilitation_r)
+write.csv(facilitation_r, "facilitation_r.csv", row.names = FALSE)
+unique(facilitation_r)
+```
+
+## Excitability (CSE): Primary analysis of using metafor::rma.mv()
+```{r primary excitability meta-analysis RE REML using metafor}
+m.cor.excitability <- rma.mv(yi = z, # pool correlation coefficients Fishers Z transformation https://bookdown.org/mwheymans/bookmi/pooling-correlation-coefficients-1.html
+                V = var.z, # sampling variance of Fisher's Z values: 1/(N−3), where N = the sample size.
+                slab = author,
+                data = excitability_r,
+                random = ~ 1 | author/cor_id,
+                test = "t", 
+                method = "REML")
+summary(m.cor.excitability)
+```
+
+### Excitability (CSE): Converting Fisher's z back to Pearson's r
+
+```{r Convert excitability Fisher z back to Pearsons r}
+round(convert_z2r(-0.0287), 2) # point estimate
+round(convert_z2r(-0.1190), 2) # lower CI
+round(convert_z2r(0.0617), 2) # Upper CI
+```
+
+### Excitability (CSE): Explore heterogeneity
+
+```{r excitability Heterogeneity}
+i2 <- var.comp(m.cor.excitability)
+summary(i2)
+plot(i2)
+```
+
+ADD TEXT
+
+
+## Excitability (CSE): Sensitivity analysis using meta::metacor()
+
+```{r Primary excitability analysis using meta}
+m.excitability <- metacor(cor = cor, 
+              n = n,
+              studlab = author,
+              data = excitability_r,
+              cluster = cluster,
+              common = FALSE,
+              random = TRUE,
+              method.tau = "REML",
+              method.random.ci = "HK",
+              title = "Sensitivity meta-analysis using metacor")
+
+m.excitability
+```
+
+
+#Corticospinal excitability
+ADD TEXT
+
+## Excitability (CSE): Forest plot
+```{r Forest plot excitability, fig.height=7, fig.width=14}
+forest(m.excitability, 
+       layout = "Revman5", 
+       common = FALSE, 
+       xlim = c(-0.9,0.9), 
+       prediction = TRUE, 
+       fs.hetstat = 10, 
+       col.subgroup = "black",
+       addrows.below.overall = 2)
+```
+
+
+Excitability (CSE): Save plot
+```{r Forest plot excitability export SVG, echo=TRUE}
+
+library(svglite)
+
+svglite("forest_plot_excitability.svg", height = 7, width = 7)
+
+forest(m.excitability, 
+       layout = "Revman5", 
+       common = FALSE, 
+       xlim = c(-0.9,0.9), 
+       prediction = TRUE, 
+       fs.hetstat = 10, 
+       col.subgroup = "black",
+       addrows.below.overall = 2)
+
+dev.off()
+
+```
+
+## Inhibition (SICI, LICI, cSP, iSP): Primary analysis of using metafor::rma.mv()
+```{r primary inhibition meta-analysis RE REML using metafor}
+m.cor.inhibition <- rma.mv(yi = z, # pool correlation coefficients Fishers Z transformation https://bookdown.org/mwheymans/bookmi/pooling-correlation-coefficients-1.html
+                V = var.z, # sampling variance of Fisher's Z values: 1/(N−3), where N = the sample size.
+                slab = author,
+                data = inhibition_r,
+                random = ~ 1 | author/cor_id,
+                test = "t", 
+                method = "REML")
+summary(m.cor.inhibition)
+```
+
+### Inhibition (SICI, LICI, cSP, iSP): Converting Fisher's z back to Pearson's r
+
+```{r Convert inhibition Fisher z back to Pearsons r}
+round(convert_z2r(0.0237), 2) # point estimate
+round(convert_z2r(-0.1021), 2) # lower CI
+round(convert_z2r(0.1496), 2) # Upper CI
+```
+
+### Inhibition (SICI, LICI, cSP, iSP): Explore heterogeneity
+
+```{r inhibition Heterogeneity}
+i2 <- var.comp(m.cor.inhibition)
+summary(i2)
+plot(i2)
+```
+
+ADD TEXT
+
+
+## Inhibition (SICI, LICI, cSP, iSP): Sensitivity analysis using meta::metacor()
+
+```{r Primary inhibition analysis using meta}
+m.inhibition <- metacor(cor = cor, 
+              n = n,
+              studlab = author,
+              data = inhibition_r,
+              cluster = cluster,
+              common = FALSE,
+              random = TRUE,
+              method.tau = "REML",
+              method.random.ci = "HK",
+              title = "Sensitivity meta-analysis using metacor")
+
+m.inhibition
+```
+
+#Cortical inhibition
+ADD TEXT
+
+## Inhibition (SICI, LICI, cSP, iSP): Forest plot
+```{r Forest plot for inhibition, fig.height=7, fig.width=14}
+forest(m.inhibition, 
+       layout = "Revman5", 
+       common = FALSE, 
+       xlim = c(-0.9,0.9), 
+       prediction = TRUE, 
+       fs.hetstat = 10, 
+       col.subgroup = "black",
+       addrows.below.overall = 2)
+```
+
+
+Inhibition (SICI, LICI, cSP, iSP): Save plot
+```{r Forest plot inhibition export SVG, echo=TRUE}
+
+library(svglite)
+
+svglite("forest_plot_inhibition.svg", height = 7, width = 7)
+
+forest(m.inhibition, 
+       layout = "Revman5", 
+       common = FALSE, 
+       xlim = c(-0.9,0.9), 
+       prediction = TRUE, 
+       fs.hetstat = 10, 
+       col.subgroup = "black",
+       addrows.below.overall = 2)
+
+dev.off()
+
+```
+
+
+## Facilitation (ICF, SICF): Primary analysis of using metafor::rma.mv()
+```{r primary facilitation meta-analysis RE REML using metafor}
+m.cor.facilitation <- rma.mv(yi = z, # pool correlation coefficients Fishers Z transformation https://bookdown.org/mwheymans/bookmi/pooling-correlation-coefficients-1.html
+                V = var.z, # sampling variance of Fisher's Z values: 1/(N−3), where N = the sample size.
+                slab = author,
+                data = facilitation_r,
+                random = ~ 1 | author/cor_id,
+                test = "t", 
+                method = "REML")
+summary(m.cor.facilitation)
+```
+
+### Facilitation (ICF, SICF): Converting Fisher's z back to Pearson's r
+
+```{r Convert facilitation Fisher z back to Pearsons r}
+round(convert_z2r(0.0674), 2) # point estimate
+round(convert_z2r(-0.0449), 2) # lower CI
+round(convert_z2r(0.1797), 2) # Upper CI
+```
+
+### Facilitation (ICF, SICF): Explore heterogeneity
+
+```{r facilitation Heterogeneity}
+i2 <- var.comp(m.cor.facilitation)
+summary(i2)
+plot(i2)
+```
+
+ADD TEXT
+
+
+## Facilitation (ICF, SICF): Sensitivity analysis using meta::metacor()
+
+```{r Primary facilitation analysis using meta}
+m.facilitation <- metacor(cor = cor, 
+              n = n,
+              studlab = author,
+              data = facilitation_r,
+              cluster = cluster,
+              common = FALSE,
+              random = TRUE,
+              method.tau = "REML",
+              method.random.ci = "HK",
+              title = "Sensitivity meta-analysis using metacor")
+
+m.facilitation
+```
+
+#Cortical Facilitation
+ADD TEXT
+
+## Facilitation (ICF, SICF): Forest plot
+```{r Forest plot facilitation, fig.height=7, fig.width=14}
+forest(m.facilitation, 
+       layout = "Revman5", 
+       common = FALSE, 
+       xlim = c(-0.9,0.9), 
+       prediction = TRUE, 
+       fs.hetstat = 10, 
+       col.subgroup = "black",
+       addrows.below.overall = 2)
+```
+
+
+Facilitation (ICF, SICF): Save plot
+```{r Forest plot facilitation export SVG, echo=TRUE}
+
+library(svglite)
+
+svglite("forest_plot_facilitation.svg", height = 7, width = 7)
+
+forest(m.facilitation, 
+       layout = "Revman5", 
+       common = FALSE, 
+       xlim = c(-0.9,0.9), 
+       prediction = TRUE, 
+       fs.hetstat = 10, 
+       col.subgroup = "black",
+       addrows.below.overall = 2)
+
+dev.off()
+
+```
+
+# Meta-analysis: Subgroup analyses
+## Inhibition measure
+```{r Subgroup analysis by inhibitory measure using metafor}
+inhibition_r$inhibitory.measure <- as.factor(inhibition_r$inhibitory.measure)
+
+inhibition_tms_subg <- rma.mv(yi = z, 
+                      V = var.z,
+                      slab = author, 
+                      data = inhibition_r,
+                      random = ~ 1 | author/cor_id, 
+                      test = "t", 
+                      method = "REML",
+                      mods = ~ inhibitory.measure)
+
+summary(inhibition_tms_subg)
+```
+
+ADD TEXT
+
+
+```{r inhibition by measure type meta, warning=FALSE}
+inhibition_measure_type <- update(m.inhibition, subgroup = inhibitory.measure, tau.common = TRUE)
+inhibition_measure_type
+```
+
+ADD TEXT
+
+```{r Forest plot for inhibition type using meta, fig.height=10, fig.width=14}
+forest(inhibition_measure_type, 
+       layout = "Revman5", 
+       common = FALSE, 
+       xlim = c(-0.9,0.9), 
+       prediction = TRUE, 
+       fs.hetstat = 10, 
+       col.subgroup = "black",
+       addrows.below.overall = 2)
+```
+
+Inhibition measure type: Save plot
+```{r Forest plot inhibition type export SVG, echo=TRUE}
+
+library(svglite)
+
+svglite("forest_plot_inhibition-measure.svg", height = 10, width = 14)
+
+forest(inhibition_measure_type, 
+       layout = "Revman5", 
+       common = FALSE, 
+       xlim = c(-0.9,0.9), 
+       prediction = TRUE, 
+       fs.hetstat = 10, 
+       col.subgroup = "black",
+       addrows.below.overall = 2)
+
+dev.off()
+
+```
+
+## Facilitation Measure
+
+```{r Subgroup analysis by facilitation type using metafor}
+facilitation_r$facilitatory.measure <- as.factor(facilitation_r$facilitatory.measure)
+
+facilitation_type <- rma.mv(yi = z, 
+                      V = var.z,
+                      slab = author, 
+                      data = facilitation_r,
+                      random = ~ 1 | author/cor_id, 
+                      test = "t", 
+                      method = "REML",
+                      mods = ~ facilitatory.measure)
+
+summary(facilitation_type)
+```
+
+
+```{r facilitation type meta, warning=FALSE}
+facilitation_measure_type <- update(m.facilitation, subgroup = facilitatory.measure, tau.common = TRUE)
+facilitation_measure_type
+```
+
+
+```{r Forest plot for facilitation type meta, fig.height=7, fig.width=14}
+
+forest(facilitation_measure_type, 
+       layout = "Revman5", 
+       common = FALSE, 
+       xlim = c(-0.9,0.9), 
+       prediction = TRUE, 
+       fs.hetstat = 10, 
+       col.subgroup = "black",
+       addrows.below.overall = 2)
+```
+
+Facilitation by tms measure type: Save plot
+```{r Forest plot facilitation type SVG, echo=TRUE}
+
+library(svglite)
+
+svglite("forest_plot_facilitation-type.svg", height = 7, width = 14)
+
+forest(facilitation_measure_type, 
+       layout = "Revman5", 
+       common = FALSE, 
+       xlim = c(-0.9,0.9), 
+       prediction = TRUE, 
+       fs.hetstat = 10, 
+       col.subgroup = "black",
+       addrows.below.overall = 2)
+
+dev.off()
+
+```
+
+## Physical Activity Objectivity for Excitability
+
+```{r Subgroup analysis by physical activity objectivity for excitability using metafor}
+excitability_r$PA_objectivity <- as.factor(excitability_r$PA_objectivity)
+
+excitability_PA_type <- rma.mv(yi = z, 
+                      V = var.z,
+                      slab = author, 
+                      data = excitability_r,
+                      random = ~ 1 | author/cor_id, 
+                      test = "t", 
+                      method = "REML",
+                      mods = ~ PA_objectivity)
+
+summary(excitability_PA_type)
+```
+
+
+```{r excitability PA type meta, warning=FALSE}
+excitability_PA_type <- update(m.excitability, subgroup = PA_objectivity, tau.common = TRUE)
+excitability_PA_type
+```
+
+
+```{r Forest plot by physical activity objectivity for excitability using meta, fig.height=7, fig.width=14}
+
+forest(excitability_PA_type, 
+       layout = "Revman5", 
+       common = FALSE, 
+       xlim = c(-0.9,0.9), 
+       prediction = TRUE, 
+       fs.hetstat = 10, 
+       col.subgroup = "black",
+       addrows.below.overall = 2)
+```
+
+excitability by PA measure type: Save plot
+```{r Forest plot excitability PA type SVG, echo=TRUE}
+
+library(svglite)
+
+svglite("forest_plot_excitability-PA-type.svg", height = 7, width = 14)
+
+forest(excitability_PA_type, 
+       layout = "Revman5", 
+       common = FALSE, 
+       xlim = c(-0.9,0.9), 
+       prediction = TRUE, 
+       fs.hetstat = 10, 
+       col.subgroup = "black",
+       addrows.below.overall = 2)
+
+dev.off()
+
+```
+
+## Physical Activity Objectivity for Inhibition
+
+```{r Subgroup analysis by physical activity objectivity for inhibition using metafor}
+inhibition_r$PA_objectivity <- as.factor(inhibition_r$PA_objectivity)
+
+inhibition_PA_type <- rma.mv(yi = z, 
+                      V = var.z,
+                      slab = author, 
+                      data = inhibition_r,
+                      random = ~ 1 | author/cor_id, 
+                      test = "t", 
+                      method = "REML",
+                      mods = ~ PA_objectivity)
+
+summary(inhibition_PA_type)
+```
+
+```{r inhibition PA type meta, warning=FALSE}
+inhibition_PA_type <- update(m.inhibition, subgroup = PA_objectivity, tau.common = TRUE)
+inhibition_PA_type
+```
+
+
+```{r Forest plot by physical activity objectivity for inhibition using meta, fig.height=7, fig.width=14}
+
+forest(inhibition_PA_type, 
+       layout = "Revman5", 
+       common = FALSE, 
+       xlim = c(-0.9,0.9), 
+       prediction = TRUE, 
+       fs.hetstat = 10, 
+       col.subgroup = "black",
+       addrows.below.overall = 2)
+```
+
+Inhibition by PA measure type: Save plot
+```{r Forest plot inhibition PA type SVG, echo=TRUE}
+
+library(svglite)
+
+svglite("forest_plot_inhibition-PA-type.svg", height = 7, width = 14)
+
+forest(inhibition_PA_type, 
+       layout = "Revman5", 
+       common = FALSE, 
+       xlim = c(-0.9,0.9), 
+       prediction = TRUE, 
+       fs.hetstat = 10, 
+       col.subgroup = "black",
+       addrows.below.overall = 2)
+
+dev.off()
+
+```
+
+## Physical Activity Objectivity for Facilitation
+
+```{r Subgroup analysis by physical activity objectivity for facilitation using metafor}
+facilitation_r$PA_objectivity <- as.factor(facilitation_r$PA_objectivity)
+
+facilitation_PA_type <- rma.mv(yi = z, 
+                      V = var.z,
+                      slab = author, 
+                      data = facilitation_r,
+                      random = ~ 1 | author/cor_id, 
+                      test = "t", 
+                      method = "REML",
+                      mods = ~ PA_objectivity)
+
+summary(facilitation_PA_type)
+```
+
+```{r facilitation PA type meta, warning=FALSE}
+facilitation_PA_type <- update(m.facilitation, subgroup = PA_objectivity, tau.common = TRUE)
+facilitation_PA_type
+```
+
+```{r Forest plot by physical activity objectivity for facilitation using meta, fig.height=7, fig.width=14}
+
+forest(facilitation_PA_type, 
+       layout = "Revman5", 
+       common = FALSE, 
+       xlim = c(-0.9,0.9), 
+       prediction = TRUE, 
+       fs.hetstat = 10, 
+       col.subgroup = "black",
+       addrows.below.overall = 2)
+```
+
+Facilitation by tms measure type: Save plot
+```{r Forest plot facilitation PA type SVG, echo=TRUE}
+
+library(svglite)
+
+svglite("forest_plot_facilitation-type.svg", height = 7, width = 14)
+
+forest(facilitation_PA_type, 
+       layout = "Revman5", 
+       common = FALSE, 
+       xlim = c(-0.9,0.9), 
+       prediction = TRUE, 
+       fs.hetstat = 10, 
+       col.subgroup = "black",
+       addrows.below.overall = 2)
+
+dev.off()
+
+```
+
+# Meta Regressions
+## Excitability
+### Meta-regressions by proportion of women
+```{r Meta-regression by proportion of women excitability}
+m.cor.reg.excitability.women <- metareg(m.excitability, ~Prop_women)
+m.cor.reg.excitability.women
+```
+
+### Meta-regressions by age
+```{r Meta-regression by age excitability}
+m.cor.reg.excitability.age <- metareg(m.excitability, ~Age)
+m.cor.reg.excitability.age
+```
+
+### Meta-regressions by study quality
+```{r Meta-regression by study quality excitability}
+m.cor.reg.excitability.quality <- metareg(m.excitability, ~Q_score)
+m.cor.reg.excitability.quality
+```
+
+## Inhibition
+### Meta-regressions by proportion of women
+```{r Meta-regression by proportion of women inhibition}
+m.cor.reg.inhibition.women <- metareg(m.inhibition, ~Prop_women)
+m.cor.reg.inhibition.women
+```
+
+### Meta-regressions by age
+```{r Meta-regression by age inhibition}
+m.cor.reg.inhibition.age <- metareg(m.inhibition, ~Age)
+m.cor.reg.inhibition.age
+```
+
+### Meta-regressions by study quality
+```{r Meta-regression by study quality inhibition}
+m.cor.reg.inhibition.quality <- metareg(m.inhibition, ~Q_score)
+m.cor.reg.inhibition.quality
+```
+
+## Facilitation
+### Meta-regressions by proportion of women
+```{r Meta-regression by proportion of women facilitation}
+m.cor.reg.facilitation.women <- metareg(m.facilitation, ~Prop_women)
+m.cor.reg.facilitation.women
+```
+
+### Meta-regressions by age
+```{r Meta-regression by age facilitation}
+m.cor.reg.facilitation.age <- metareg(m.facilitation, ~Age)
+m.cor.reg.facilitation.age
+```
+
+### Meta-regressions by study quality
+```{r Meta-regression by study quality facilitation}
+m.cor.reg.facilitation.quality <- metareg(m.facilitation, ~Q_score)
+m.cor.reg.facilitation.quality
+```
+
+# Equivalence Testing
+## Excitability
+```{r Equivalence testing excitability}
+
+# Define SESOI in r
+sesoi_r <- 0.1
+
+# Convert r to Fisher's z
+low_eq_z  <- atanh(-sesoi_r)
+high_eq_z <- atanh( sesoi_r)
+
+TOSTmeta(
+  ES = -0.0287,
+  se = 0.0432,
+  low_eqbound  = low_eq_z,
+  high_eqbound =  high_eq_z,
+  alpha = 0.05
+)
+```
+## Inhibition
+```{r Equivalence testing inhibition}
+
+# Define SESOI in r
+sesoi_r <- 0.1
+
+# Convert r to Fisher's z
+low_eq_z  <- atanh(-sesoi_r)
+high_eq_z <- atanh( sesoi_r)
+
+TOSTmeta(
+  ES = 0.0237,
+  se = 0.0597,
+  low_eqbound  = low_eq_z,
+  high_eqbound =  high_eq_z,
+  alpha = 0.05
+)
+```
+
+
+## Facilitation
+```{r Equivalence testing facilitation}
+
+# Define SESOI in r
+sesoi_r <- 0.1
+
+# Convert r to Fisher's z
+low_eq_z  <- atanh(-sesoi_r)
+high_eq_z <- atanh( sesoi_r)
+
+TOSTmeta(
+  ES = 0.0674,
+  se = 0.0520,
+  low_eqbound  = low_eq_z,
+  high_eqbound =  high_eq_z,
+  alpha = 0.05
+)
+```
+
+
+# Publication bias analysis
+## Small-study effects
+### Funnel plot 
+
+```{r Contour-enhanced funnel plot excitability, fig.height=6, fig.width=8}
+# Define fill colors for contour
+col.contour = c("gray85", "gray75")
+
+# Funnel plot
+meta::funnel(m.excitability, 
+             xlim = c(-1.5, 1),
+             contour = c(0.95, 0.99),
+             col.contour = col.contour)
+
+# legend
+legend(x =0.5, y = 0.01, 
+       legend = c("p < 0.05", "p < 0.01"),
+       fill = col.contour)
+
+# title
+title("Contour-Enhanced Funnel Plot (excitability)")
+```
+
+```{r Contour-enhanced funnel plot inhibition, fig.height=6, fig.width=8}
+# Define fill colors for contour
+col.contour = c("gray85", "gray75")
+
+# Funnel plot
+meta::funnel(m.inhibition, 
+             xlim = c(-1.5, 1),
+             contour = c(0.95, 0.99),
+             col.contour = col.contour)
+
+# legend
+legend(x =0.5, y = 0.01, 
+       legend = c("p < 0.05", "p < 0.01"),
+       fill = col.contour)
+
+# title
+title("Contour-Enhanced Funnel Plot (inhibition)")
+```
+
+
+```{r Save funnel plot}
+png(file = "Funnel Plot.png", width = 2500, height = 2000, res = 300)
+
+# Define fill colors for contour
+col.contour = c("gray85", "gray75")
+
+# Funnel plot
+meta::funnel(m.inhibition, 
+             xlim = c(-1.5, 1),
+             contour = c(0.95, 0.99),
+             col.contour = col.contour)
+
+# legend
+legend(x =0.5, y = 0.01, 
+       legend = c("p < 0.05", "p < 0.01"),
+       fill = col.contour)
+
+# title
+title("Contour-Enhanced Funnel Plot (tms and Physical Activity)")
+
+dev.off()
+```
+
+```{r Contour-enhanced funnel plot facilitation, fig.height=6, fig.width=8}
+# Define fill colors for contour
+col.contour = c("gray85", "gray75")
+
+# Funnel plot
+meta::funnel(m.facilitation, 
+             xlim = c(-1.5, 1),
+             contour = c(0.95, 0.99),
+             col.contour = col.contour)
+
+# legend
+legend(x =0.5, y = 0.01, 
+       legend = c("p < 0.05", "p < 0.01"),
+       fill = col.contour)
+
+# title
+title("Contour-Enhanced Funnel Plot (facilitation)")
+```
+
+### Egger's test
+ADD TEXT
+
+```{r Eggers test for excitability}
+test.egger = rma.mv(z,var.z, mod = ~ sqrt(var.z), random =  ~ 1 | author/cor_id, data = excitability_r, test = "t")
+test.egger
+```
+
+
+```{r Eggers test for inhibition}
+test.egger = rma.mv(z,var.z, mod = ~ sqrt(var.z), random =  ~ 1 | author/cor_id, data = inhibition_r, test = "t")
+test.egger
+```
+
+
+```{r Eggers test for facilitation}
+test.egger = rma.mv(z,var.z, mod = ~ sqrt(var.z), random =  ~ 1 | author/cor_id, data = facilitation_r, test = "t")
+test.egger
+```
+#Pulication Bias
+ADD TEXT
+
+# References
+- Cohen J. Statistical power analysis for the behavioral sciences. 2nd ed.; 1988.  
+- Egger M, Davey Smith G, Schneider M, Minder C. Bias in meta-analysis detected by a simple, graphical test. BMJ. 1997;315(7109):629-634. https://doi.org/10.1136/bmj.315.7109.62  
+- Higgins JPT, Thompson SG. Quantifying heterogeneity in a meta-analysis. Stat Med. 2002;21(11):1539-1558. https://doi.org/10.1002/sim.1186 
+- Knapp G, Hartung J. Improved tests for a random effects meta-regression with a single covariate. Stat Med. 2003;22(17):2693-2710. https://doi.org/10.1002/sim.1482  
+- R Core Team. R: A language and environment for statistical computing [Computer software]. Version 4.3.1. Vienna, Austria: Foundation for Statistical Computing; 2023. https://www.r-project.org 
+- Schwarzer G. Meta: General package for meta-analysis [R package]. Version 6.5-0; 2023. https://cran.r-project.org/web/packages/meta/meta.pdf 
+- Simonsohn U, Nelson LD, Simmons JP. P-curve: A key to the file-drawer. J Exp Psychol Gen. 2014;143(2):534-547. http://doi.org/10.1037/a0033242  
+- Viechtbauer W. Bias and efficiency of meta-analytic variance estimators in the random-effects model. J Educ Behav Stat. 2005;30(3):261-293. https://doi.org/10.3102/10769986030003261  
+- Viechtbauer W. Conducting meta-analyses in R with the metafor package. J Stat Softw. 2010;36(3):1-48. https://doi.org/10.18637/jss.v036.i03  
+- Viechtbauer W. Metafor: Meta-analysis package for R [R package]. Version 4.2-0; 2023. https://cran.r-pro-ject.org/web/packages/metafor/metafor.pdf  
+- Viechtbauer, "W. (2023). Metafor: Meta-Analysis Package for R (Version 4.2-0) [R pakage]. https://cran.r-project.org/web/packages/metafor/metafor.pdf  
