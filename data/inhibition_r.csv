@@ -1,0 +1,19 @@
+"author","cluster","cor","n","inhibitory.measure","PA_objectivity","PA_measure","PA_outcome","Age","Prop_women","Q_score","standard_error","Limb","z","var.z","cor_id"
+"Cirillo, 2009","study 1",0.08,28,"SICI","Self-reported measure","IPAQ","MET-min/week","24.4",0.46,12,0.2,"Upper Limb",0.0801713250375897,0.04,1
+"Cirillo, 2009","study 1",0.16,28,"cSP","Self-reported measure","IPAQ","(MET)-min/week","24.4",46,12,0.2,"Upper Limb",0.161386696131526,0.04,2
+"McGregor, 2011","study 2",0.44,24,"iSP","Self-reported measure","GLTEQ","Score","69",0.53,14,0.2,"Upper Limb",0.472230804420426,0.0476190476190476,3
+"McGregor, 2013","study 3",0.48,38,"iSP","Self-reported measure","Ad-hoc questionnaire ","Active time","52.1",0.55,16,0.16,"Upper Limb",0.522984277591344,0.0285714285714286,4
+"Lulic, 2017","study 4",0.14,24,"SICI","Self-reported measure","IPAQ","MET-min/week","21",0.6,13,0.21,"Upper Limb",0.140925576070494,0.0476190476190476,5
+"Houde, 2018","study 5",0.124,26,"cSP","Self-reported measure","Ad-hoc questionnaire ","Frequency","70",50,13,0.208,"Upper Limb",0.124641469758622,0.0434782608695652,6
+"El-Sayes, 2019","study 6",-0.08,34,"SICI","Self-reported measure","IPAQ","MET-min/week","21",0.5,13,0.17,"Upper Limb",-0.0801713250375897,0.032258064516129,7
+"Hu, 2021","study 8",-0.27,29,"SICI","Self-reported measure","IPAQ","MET-min/week","19.3",1,15,0.19,"Upper Limb",-0.2768638226551,0.0384615384615385,8
+"Hand, 2022a","study 7",-0.37,33,"SICI","Self-reported measure","IPAQ","MET-min/week","32",0.24,11,0.18,"Upper Limb",-0.388423099718296,0.0333333333333333,9
+"Hand, 2022a","study 7",-0.09,33,"SICI","Self-reported measure","IPAQ","MET-min/week","32",0.24,11,0.18,"Lower Limb",-0.0902441878561468,0.0333333333333333,10
+"Hand, 2022b","study 9",-0.21,28,"SICI","Self-reported measure","IPAQ","MET-min/week","23",0.25,14,0.2,"Upper Limb",-0.21317134656486,0.04,11
+"Wang, 2023","study 10",-0.13,40,"SICI","Self-reported measure","PAQ","Active time","25",0.35,12,0.16,"Upper Limb",-0.130739850028878,0.027027027027027,12
+"Diognet, 2025","Study 11",-0.11,45,"SICI","Self-reported measure","IPAQ","MET-min/week","23.1",NA,16,0.15,"Upper Limb",-0.110446915790097,0.0238095238095238,13
+"Gamage, 2025","Study 12",0.14,54,"SICI","Self-reported measure","IPAQ","MET-min/week","69",0.38,20,0.14,"Upper Limb",0.140925576070494,0.0196078431372549,14
+"Harroum, 2025","Study 13",0.11,30,"SICI","Self-reported measure","IPAQ","MET-min/week","27(6)",0.5,17,0.19,"Upper Limb",0.110446915790097,0.037037037037037,15
+"Harroum, 2025","Study 13",-0.09,30,"SICI","Self-reported measure","IPAQ","MET-min/week","27(6)",0.5,17,0.19,"Upper Limb",-0.0902441878561468,0.037037037037037,16
+"Farajzadeh, 2026","study 14",-0.055,43,"SICI","Device-based measure","Accelerometer","Steps/day","32.6",0.63,13,0.15,"Upper Limb",-0.0550555592082121,0.025,17
+"Farajzadeh, 2026","study 14",0.049,43,"LICI","Device-based measure","Accelerometer","Steps/day","32.6",0.63,13,0.15,"Upper Limb",0.0490392729254534,0.025,18

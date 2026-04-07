@@ -1,0 +1,15 @@
+"author","cluster","cor","n","facilitatory.measure","PA_objectivity","PA_measure","PA_outcome","Age","Prop_women","Q_score","standard_error","Limb","z","var.z","cor_id"
+"Lulic, 2017","study 1",0.009,24,"ICF","Self-reported measure","IPAQ","MET-min/week",21,0.6,13,0.21,"Upper Limb",0.00900024301181048,0.0476190476190476,1
+"Lulic, 2017","study 1",0.37,26,"SICF","Self-reported measure","IPAQ","(MET)-min/week",21,0.6,13,0.201,"Upper Limb",0.388423099718296,0.0434782608695652,2
+"Lulic, 2017","study 1",-0.15,24,"SICF","Self-reported measure","IPAQ","(MET)-min/week",21,0.6,13,0.21,"Upper Limb",-0.151140435936467,0.0476190476190476,3
+"Hand, 2021a","study 2",0.22,33,"ICF","Self-reported measure","IPAQ","MET-min/week",32,0.24,11,0.18,"Upper Limb",0.223656109021832,0.0333333333333333,4
+"Hand, 2021a","study 2",0.18,33,"ICF","Self-reported measure","IPAQ","MET-min/week",32,0.24,11,0.18,"Lower Limb",0.181982688600706,0.0333333333333333,5
+"Hand, 2021a","study 2",0.02,33,"SICF","Self-reported measure","IPAQ","(MET)-min/week",32,0.24,11,0.18,"Upper Limb",0.0200026673068496,0.0333333333333333,6
+"Hand, 2021a","study 2",0.18,33,"SICF","Self-reported measure","IPAQ","(MET)-min/week",32,0.24,11,0.18,"Lower Limb",0.181982688600706,0.0333333333333333,7
+"Hu, 2021","study 3",0.11,29,"ICF","Self-reported measure","IPAQ","MET-min/week",19.3,1,15,0.19,"Upper Limb",0.110446915790097,0.0384615384615385,8
+"Hand, 2022b","study 4",0.3,28,"ICF","Self-reported measure","IPAQ","MET-min/week",23,0.25,14,0.2,"Upper Limb",0.309519604203112,0.04,9
+"Hand, 2022b","study 4",-0.14,28,"SICF","Self-reported measure","IPAQ","(MET)-min/week",23,0.25,14,0.2,"Upper Limb",-0.140925576070494,0.04,10
+"Curtin, 2023a","study 5",-0.18,20,"ICF","Self-reported measure","IPAQ","MET-min/week",25.3,0.7,16,0.24,"Upper Limb",-0.181982688600706,0.0588235294117647,11
+"Curtin, 2023b","study 6",-0.39,18,"ICF","Self-reported measure","IPAQ","MET-min/week",64.1,0.55,16,0.26,"Upper Limb",-0.41180003447869,0.0666666666666667,12
+"Wang, 2023","study 7",0.13,40,"ICF","Self-reported measure","PAQ","Active time",25,0.35,12,0.16,"Upper Limb",0.130739850028878,0.027027027027027,13
+"Farajzadeh, 2026","study 8",-0.047,43,"ICF","Device-based measure","Accelerometer","Steps/day",32.6,0.63,13,0.15,"Upper Limb",-0.0470346536081674,0.025,14
