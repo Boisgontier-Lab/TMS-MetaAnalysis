@@ -30,7 +30,7 @@ Packages required:
 (5) esc
 (6) TOSTER
 
-### Primary Meta-Analyses
+# Methods
 Pearson product–moment correlations from eligible studies were pooled to examine the relationship 
 between physical activity and TMS measures of cortico-spinal excitability, cortical inhibition, and cortical 
 facilitation.  Prior  to  analysis,  r  correlations  were  Fisher’s  z-transformed  to  stabilize  variance,  and  the 
