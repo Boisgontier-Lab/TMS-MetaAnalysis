@@ -1,8 +1,9 @@
 # Ignore the .DS_Store file which is created by macOS
 .DS_Store
 
-# Ignore the .env file which contains sensitive information
+# Ignore the files which contains sensitive information
 .env
+final.pdf
 
 # Ignore the outputs
 *.svg

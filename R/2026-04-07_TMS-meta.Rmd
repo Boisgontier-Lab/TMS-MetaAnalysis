@@ -1,6 +1,6 @@
 ---
 title: "Meta-Analysis_TMS_Physical_Activity"
-author: "IM Lahart, A Farajzadeh, MP Boisgontier"
+author: "Ata Farajzadeh (1), Kayne Park (1), Timothée Dumas (1), Ian M. Lahart (2), Anthony N. Carlsen (3), Matthieu P.Boisgontier (1,4)"
 date: "`r format(Sys.Date(),'%e de %B, %Y')`"
 output:
   pdf_document:
@@ -14,6 +14,14 @@ body{
 }
 </style>
 ---
+(1) School of Rehabilitation Sciences, Faculty of Health Sciences, University of Ottawa, Ottawa, Canada;
+(2) Faculty of Education, Health and Wellbeing, Institute of Human Sciences, University of Wolverhampton, 
+Wolverhampton, United Kingdom;
+(3) School of Human Kinetics, Faculty of Health Sciences, University of 
+Ottawa, Ottawa, Canada;
+(4) Institut du Savoir Montfort, Hôpital Montfort, Ottawa, Ontario, Canada.
+
+Correspondence: Ata Farajzadeh (ata.farajzadeh@uottawa.ca).
 
 # R Markdown file set-up and packages
 
@@ -22,13 +30,198 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 Packages required:
-1) dmetar
-2) tidyverse
-3) meta
-4) metafor
-5) esc
-6) TOSTER
 
+(1) dmetar
+(2) tidyverse
+(3) meta
+(4) metafor
+(5) esc
+(6) TOSTER
+
+# Abstract
+Acute exercise transiently modulates motor cortical physiology, but whether habitual physical activity is 
+associated with persistent neuroplastic differences remains unclear. Following PRISMA guidelines, we 
+conducted a systematic review and meta-analysis and searched MEDLINE, Web of Science, PsycINFO, 
+SPORTDiscus,  and  CINAHL  from  inception  to  February  2026.  We  included  observational  studies 
+assessing associations between physical activity and TMS-derived measures in healthy adults. Pearson 
+correlations  were  pooled  using  multilevel  random-effects  meta-analyses.  Twenty  studies  (761 
+participants)  met  the  inclusion  criteria.  Meta-analyses  included  20  correlations  for  corticospinal 
+excitability (600 participants), 18 for cortical inhibition (610 participants), and 14 for cortical facilitation 
+(412 participants). There was no evidence of an association between physical activity and corticospinal 
+excitability (r = −0.03, 95% CI −0.12 to 0.06), cortical inhibition (r = 0.02, 95% CI −0.10 to 0.15), or 
+cortical  facilitation  (r  =  0.07,  95%  CI  −0.04  to  0.18).  Equivalence  testing  indicated  that  any  true 
+association  between  physical  activity  and  corticospinal  excitability  is  negligible.  Subgroup  analyses 
+comparing self-reported and device-based measures of physical activity showed no significant difference. 
+Overall,  these  findings  indicate  that  habitual  physical  activity  is  not  statistically  associated  with 
+corticospinal excitability and provide no evidence of associations with inhibitory or facilitatory circuits, in 
+contrast with previous work showing transient effects of acute exercise. The review was registered in 
+PROSPERO (CRD420251016029).
+
+# Keywords
+motor cortex; transcranial magnetic stimulation; motor activity; exercise; physical exertion
+
+# Introduction
+       The primary motor cortex (M1) is a key node in the control of voluntary movement by integrating 
+inputs from multiple cortical and subcortical regions and transforming them into descending corticospinal 
+signals that drive skeletal muscle activity (1). In the short term, corticospinal excitability is dynamically 
+modulated during action preparation and selection, reflecting the influence of distributed neural circuits 
+involved in action control (2). Beyond these short-term modulations, M1 circuits exhibit plasticity and 
+can be modified can be modified through experience and motor practice (3).
+       Physical activity, which includes exercise, sport, active transport, household chores, and occupational 
+activities (4), may influence M1 plasticity. Evidence from systematic reviews and meta-analyses indicates 
+that  acute  exercise  can  modulate  several  measures  of  motor  cortical  function,  including  corticospinal 
+excitability as well as intracortical inhibitory and facilitatory circuits (5, 6). These acute effects typically 
+observed  within  minutes  to  hours  following  exercise,  may  be  mediated  by  transient  neurochemical 
+changes, including increases in circulating catecholamines and neurotrophic factors (7, 8). Whether the 
+repeated  occurrence  of  such  acute  effects  through  regular  engagement  in  physical  activity  results  in 
+longer-term differences in M1 neurophysiology remains unclear.
+       Although  the  association  between  habitual  physical  activity,  reflecting  typical  levels  of  physical 
+activity accumulated across daily life (4), and M1 neurophysiology has not been systematically reviewed, 
+several lines of evidence suggest that such a relationship may exist. Habitual physical activity has been 
+associated  with  alterations  in  neural  systems  supporting  plasticity,  including  increases  in  circulating 
+neurotrophic factors such as brain-derived neurotrophic factor (9). Moreover, motor cortical responses to 
+acute exercise appear to depend on habitual physical activity levels, suggesting that individual differences 
+in physical activity may influence M1 neurophysiology (10, 11).
+       In  humans,  M1  neurophysiology  can  be  probed  non-invasively  using  transcranial  magnetic 
+stimulation  (TMS).  Single-pulse  TMS  allows  assessment  of  corticospinal  excitability  (CSE)  through 
+motor-evoked potentials (MEPs), whereas paired-pulse TMS protocols probe inhibitory and facilitatory 
+cortical  circuits,  including  short-interval  intracortical  inhibition  (SICI),  long-interval  intracortical 
+inhibition (LICI), intracortical facilitation (ICF), and short-interval intracortical facilitation (SICF) (12, 
+13). In addition, TMS can assess inhibitory processes using measures such as the cortical silent period 
+(cSP)  and  the  ipsilateral  silent  period  (iSP),  which  reflect  cortical  and  interhemispheric  inhibition, 
+respectively  (14).  Despite  growing  interest  in  the  neurobiological  effects  of  physical  activity,  the 
+relationship between habitual physical activity and these TMS-derived measures of M1 neurophysiology 
+has not been systematically reviewed. Therefore, the aim of this study was to conduct a systematic review 
+and  meta-analysis  examining  the  association  between  habitual  physical  activity  and  TMS-derived 
+measures of motor neurophysiology.
+
+# Methods
+## Search Strategy
+       This  systematic  review  was  conducted  in  accordance  with  the  Preferred  Reporting  Items  for 
+Systematic  Reviews  and  Meta-Analyses  (PRISMA)  guidelines  (15).  Potentially  eligible  studies  were 
+identified  through  systematic  searches  of  MEDLINE  (via  PubMed),  PsycINFO,  Web  of  Science, 
+SPORTDiscus,  and  CINAHL.  The  search  strategy  combined  terms  related  to  physical  activity  (e.g., 
+physical activity, physical education, training, physical fitness, exercise, cycling, treadmill, single bout) 
+and TMS (e.g., TMS, transcranial magnetic stimulation, motor-evoked potential, stimulus-response curve, 
+input-output curve, intracortical inhibition, intracortical facilitation, silent period) (see Suppl. Material 1 
+for the full search strategy). The search included all articles published in English available from inception 
+up to March 2025, with no limitation on the start date. In addition, the reference lists of included articles 
+were manually screened to identify potentially relevant studies not captured in the database searches. An 
+updated search was conducted covering the period from April 2025 to February 2026. To reduce potential 
+bias and enhance transparency, this systematic review was pre-registered in the International Prospective 
+Register of Systematic Reviews (PROSPERO; registration number CRD420251016029) and approved by 
+the Office of Research Ethics and Integrity at the University of Ottawa (H-03-26-12745).
+
+## Eligibility Criteria 
+       Studies were included if they were published in a peer-reviewed journal, were written in English, 
+reported  original  data  collected  from  healthy  adult  participants  (≥  18  years),  included  at  least  one 
+neurophysiological measure of M1 assessed using TMS and at least one measure of physical activity, and 
+formally  tested  the  association  between  these  variables  (e.g.,  by  reporting  a  Pearson’s  r  correlation 
+coefficient).  Measures  of  physical  activity  could  be  self-reported  (e.g.,  questionnaire)  or  device-based 
+(e.g., accelerometry). Eligible study designs included cross-sectional studies, cohort studies, and baseline 
+data from clinical trials.
+       Studies were excluded if they were published as a review article, book chapter, study protocol, or 
+conference  abstract,  or  assessed  laboratory-based  measures  of  physical  fitness  (e.g.,  maximal  muscle 
+force).
+
+## Study selection 
+       One  author  (AF)  conducted  the  initial  database  search.  After  removing  duplicates,  the  titles  and 
+abstracts  of  all  identified  records  were  screened  according  to  the  predefined  inclusion  and  exclusion 
+criteria. Studies that did not meet the eligibility criteria were excluded. In the second stage, two authors 
+(AF, KP) independently screened the full text of the remaining articles. Both reviewers had to agree on 
+the  inclusion  or  exclusion  of  each  study.  Any  disagreements  were  resolved  through  discussion  and 
+consensus, with a third reviewer (MPB) consulted when necessary. Reference list screening and forward 
+citation tracking were conducted for all studies retained after the full-text screening stage (Fig. 1).
+
+## Data Extraction
+       Data extraction was performed independently by two reviewers (AF, KP). Any discrepancies were 
+resolved through discussion and consensus, with a third reviewer (MPB) consulted when necessary. When 
+insufficient data were reported, the corresponding author was contacted to request additional information.
+       Data were extracted from the included studies using a standardized extraction form. The extracted 
+information included the first author’s name, article title, publication year, study design, sample size, age 
+range,  mean  age,  sex  distribution,  type  of  physical  activity  measure,  duration  of  physical  activity 
+assessment, outcome measures, TMS measures, and results describing the association between physical 
+activity  and  neurophysiological  measures.  These  measures  included  MEP  amplitude  (reflecting  CSE); 
+expressed as raw amplitude, percentage of peripheral M-wave amplitude, MEPMAX, or values derived 
+from a stimulus–response curve, as well as SICI, LICI, cSP, iSP, ICF, and SICF. When studies met all 
+inclusion criteria but did not report the association of interest, the corresponding author was contacted by 
+email to request the relevant information.
+
+## Quality Assessment
+       The  methodological  quality  of  each  included  study  was  assessed  using  the  Downs  and  Black 
+checklist (16). This checklist can be applied to both randomized and non-randomized studies and consists 
+of  27  items  assessing  reporting  quality,  external  validity,  internal  validity,  and  statistical  power.  Total 
+scores range from 0 to 28, with higher scores indicating better methodological quality. Two reviewers 
+(AF, KP) independently assessed study quality, and discrepancies were resolved through discussion and 
+consensus with a third reviewer (MPB).
+
+## Statistical Analyses
+       All analyses were conducted with R software (17) in RStudio statistical environment using metafor 
+(18)  and  meta  packages  (19).  When  correlations  were  directly  reported,  these  values  were  extracted. 
+When correlations were not reported, they were computed from available statistics (e.g., t-values, exact p-
+values,  and  sample  sizes)  using  custom  R  scripts  (Suppl.  Material  2)  based  on  standard  relationships 
+between test statistics and correlation coefficients. To ensure consistent interpretation across inhibitory
+measures,  correlations  for  SICI  and  LICI  were  multiplied  by  −1  so  that  higher  values  consistently 
+reflected stronger cortical inhibition across all measures.
+
+### Primary Meta-Analyses
+       Pearson product–moment correlations from eligible studies were pooled to examine the relationship 
+between physical activity and TMS measures of cortico-spinal excitability, cortical inhibition, and cortical 
+facilitation.  Prior  to  analysis,  r  correlations  were  Fisher’s  z-transformed  to  stabilize  variance,  and  the 
+corresponding sampling variances were calculated.
+       Meta-analyses  were  conducted  using  multilevel  random-effects  models  implemented  with  the 
+metafor  package  (18).  This  approach  accounts  for  statistical  dependence  among  multiple  correlation 
+estimates  reported  within  the  same  study.  A  multilevel  approach  was  used  because  several  studies 
+contributed  more  than  one  correlation  estimate  (e.g.,  different  TMS  outcomes  or  measurement 
+conditions),  which  introduces  statistical  dependence  among  effect  sizes.  Multilevel  meta-analysis 
+appropriately accounts for this dependency without requiring aggregation of effect sizes within studies. 
+Specifically, correlation estimates were nested within studies, resulting in a three-level model (level 1: 
+sampling  variance,  level  2:  correlation  estimates  within  studies,  level  3:  studies).  Between-study 
+heterogeneity was estimated using the restricted maximum likelihood estimator (20). Heterogeneity was 
+quantified using the I² statistic, which represents the proportion of total variability in observed effect sizes 
+that is not attributable to sampling error (21). Because a multilevel meta-analytic model was used, I² 
+values were decomposed across variance components to estimate the proportion of variability attributable 
+to differences between studies and between effect sizes within studies.
+       To  reduce  the  risk  of  inflated  type  I  error  rates,  confidence  intervals  for  pooled  estimates  were 
+calculated  using  a  Knapp–Hartung  adjustment  (22).  In  addition  to  pooled  correlations  and  their 
+confidence  intervals,  prediction  intervals  were  calculated  to  estimate  the  range  within  which  the  true 
+effect size of a future study is expected to fall based on the current evidence. Unlike confidence intervals, 
+which  describe  the  precision  of  the  pooled  estimate,  prediction  intervals  incorporate  between-study 
+heterogeneity to reflect the expected variability of effects across future studies.
+       For visualization purposes, forest plots were produced using the meta package (19) with a RevMan 
+layout. These plots were based on random-effects models equivalent to the multilevel analyses.
+
+### Subgroup Meta-Analyses 
+       Subgroup analyses were conducted to examine whether pooled correlations differed across types of 
+inhibitory (SICI, LICI, cSP, and iSP) and facilitatory measures (ICF and SICF), as well as by physical 
+activity assessment method (self-reported vs. device-based).
+
+### Meta-Regressions
+       Meta-regression analyses were conducted to examine whether study-level characteristics, including 
+mean age and proportion of women were associated with the reported correlations.
+
+### Sensitivity Analysis
+       A  sensitivity  analysis  was  conducted  to  examine  whether  the  quality  of  the  studies  affected  the 
+results. 
+
+### Publication Bias
+       Potential publication bias and small-study effects were assessed using contour-enhanced funnel plots 
+and Egger’s regression tests. Funnel plots display the Fisher’s z-transformed correlations against their 
+standard errors to allow visual inspection of asymmetry around the pooled effect size. Egger’s regression 
+test  was  used  as  a  statistical  complement  to  the  visual  inspection  of  funnel  plots.  Because  no  direct 
+implementation  exists  for  multilevel  meta-analytic  models,  the  test  was  conducted  using  a  meta-
+regression approach in which the standard error of the effect size estimate was included as a predictor in 
+the multilevel model (23).
+
+### Equivalence Testing
+       When  the  results  of  the  meta-analysis  were  not  statistically  significant,  equivalence  testing  was 
+conducted  using  the  two  one-sided  tests  procedure  implemented  in  the  TOSTER  package  (24)  to 
+determine  whether  pooled  correlations  were  statistically  equivalent  to  zero  within  prespecified 
+equivalence bounds. Because no theoretically justified smallest effect size of interest could be identified, 
+equivalence tests were conducted using bounds corresponding to a small correlation (r = ±0.10) (25). 
+These bounds were converted to Fisher’s z to match the metric used in the meta-analysis. The pooled 
+correlation  was  considered  statistically  equivalent  to  zero  and  practically  negligible  when  the  90% 
+confidence interval of the pooled effect fell entirely within the equivalence bounds.
 
 ```{r install and load dmetar, include=FALSE}
 if (!require("devtools")) {
@@ -72,22 +265,21 @@ library(svglite)
 ```
 
 
-# Meta-analysis
-# Import Pearson r data
+*Meta-analysis, Import Pearson r data*
 ```{r import data files, include=FALSE}
 excitability_r  <- read.csv("excitability_r.csv",  header = TRUE, sep = ",")
 inhibition_r <- read.csv("inhibition_r.csv", header = TRUE, sep = ",")
 facilitation_r <- read.csv("facilitation_r.csv", header = TRUE, sep = ",")
 ```
 
-# Data file glimpse
+*Meta-analysis, Data file glimpse*
 ```{r glimpse, include=FALSE}
 glimpse(excitability_r)
 glimpse(inhibition_r)
 glimpse(facilitation_r)
 ```
 
-# Calculating z and var.z 
+*Meta-analysis, Calculating z and var.z*
 ```{r z and var.z calculation, include=FALSE}
 excitability_r$z <- atanh(excitability_r$cor)
 excitability_r$var.z <- 1/(excitability_r$n - 3)
@@ -108,7 +300,7 @@ write.csv(facilitation_r, "facilitation_r.csv", row.names = FALSE)
 unique(facilitation_r)
 ```
 
-## Excitability (CSE): Primary analysis of using metafor::rma.mv()
+*Meta-analysis, Excitability (CSE): Primary analysis of using metafor::rma.mv()*
 ```{r primary excitability meta-analysis RE REML using metafor}
 m.cor.excitability <- rma.mv(yi = z, # pool correlation coefficients Fishers Z transformation https://bookdown.org/mwheymans/bookmi/pooling-correlation-coefficients-1.html
                 V = var.z, # sampling variance of Fisher's Z values: 1/(N−3), where N = the sample size.
@@ -120,27 +312,21 @@ m.cor.excitability <- rma.mv(yi = z, # pool correlation coefficients Fishers Z t
 summary(m.cor.excitability)
 ```
 
-### Excitability (CSE): Converting Fisher's z back to Pearson's r
-
+*Meta-analysis, Excitability (CSE): Converting Fisher's z back to Pearson's r*
 ```{r Convert excitability Fisher z back to Pearsons r}
 round(convert_z2r(-0.0287), 2) # point estimate
 round(convert_z2r(-0.1190), 2) # lower CI
 round(convert_z2r(0.0617), 2) # Upper CI
 ```
 
-### Excitability (CSE): Explore heterogeneity
-
+*Meta-analysis, Excitability (CSE): Explore heterogeneity*
 ```{r excitability Heterogeneity}
 i2 <- var.comp(m.cor.excitability)
 summary(i2)
 plot(i2)
 ```
 
-ADD TEXT
-
-
-## Excitability (CSE): Sensitivity analysis using meta::metacor()
-
+*Meta-analysis, Excitability (CSE): Sensitivity analysis using meta::metacor()*
 ```{r Primary excitability analysis using meta}
 m.excitability <- metacor(cor = cor, 
               n = n,
@@ -157,10 +343,90 @@ m.excitability
 ```
 
 
-#Corticospinal excitability
-ADD TEXT
+# Results
+## Literature Search
+       The  primary  search  identified  4,511  potentially  relevant  articles  across  five  databases  (Fig.  1), 
+including 1,583 duplicates. After duplicate removal, 2,928 articles were screened, of which 2,736 were 
+excluded for being unrelated to TMS or physical activity. The remaining 192 articles underwent full-text 
+screening, resulting in 51 studies meeting the criteria for further investigation and potential inclusion. 
+None of these studies reported a correlation coefficient between physical activity and TMS measures. We 
+were  able  to  estimate  the  correlation  coefficient  in  five  studies  based  on  open  data  (11)  or  reported 
+statistics (10, 26–28). We contacted the corresponding authors of the remaining 46 studies to request 
+either the correlation estimate or the raw data required to compute it. At least one reminder email was sent 
+when no response was received. Twenty-Four authors responded: two provided correlation coefficients 
+(29, 30), Twelve provided raw data (31–42), three reported no longer having access to the data, and seven 
+indicated they would follow up, but the requested information was not subsequently received. One study 
+was  excluded  because  it  relied  on  the  same  dataset  as  another  included  study  (37).  Reference  list 
+screening  and  forward  citation  tracking  identified  two  additional  studies,  none  of  whose  authors 
+responded to our emails. One additional dataset from our laboratory was included (43). Ultimately, out of 
+the 53 studies meeting the criteria, 20 were included in the systematic review (37%). Detailed reasons for 
+exclusion at each stage are provided in the PRISMA flow diagram (Fig. 1). The methodological quality 
+scores of the included studies ranged from 11 to 18 out of 28 (mean ± standard deviation of 13.7 ± 1.9) 
+(Table 1).
 
-## Excitability (CSE): Forest plot
+
+*Figure 1. is accessible on the offical publication.*
+
+## Descriptive Results
+### Participants
+       The 20 articles included in the systematic review comprised 761 participants aged 19-78 years (404 males 
+and 357 females), all of whom were healthy adults. Twelve studies included only young adults (10, 11, 
+28, 32, 34–36, 38–41, 43), three included only older adults (29, 30, 42), four included both young and 
+older adults (26, 31, 33, 37), and one study included young and middle-aged adults (27).
+
+### Physical Activity
+       Four studies assessed physical activity using triaxial accelerometers (30, 31, 33, 40), which were 
+worn at the waist (ActiGraph GT3X) (31, 33, 43) or the wrist (ActivInsights GENEActiv) (30) (Table 1). 
+Sixteen  studies  assessed  physical  activity  using  self-reported  measures.  Twelve  of  these  used  the 
+International  Physical  Activity  Questionnaire  (10,  11,  28,  32,  34,  35,  37–42).  Other  self-report 
+instruments were the Leisure Time Exercise Questionnaire (26), the Physical Activity Questionnaire (36), 
+and ad-hoc questionnaires (27, 29). 
+       Physical activity outcomes included questionnaire scores from a questionnaire (26), MET-min/week 
+(10, 11, 28, 32, 34, 35, 37–42), steps per day (31, 33, 43), and active time per week (27, 29, 30, 36).
+
+### Neurophysiological Measures
+       Seventeen studies assessed TMS measures in upper-extremity muscles (10, 11, 26, 27, 29, 30, 32–38, 
+40–43). Two studies examined both upper- and lower-extremity muscles (28, 39), and one examined only 
+lower-extremity muscles (31).
+       CSE was assessed in fifteen studies (10, 11, 29–36, 38–41, 43). SICI was assessed in eleven studies, 
+using an interstimulus interval (ISI) of 2 ms (10, 11, 28, 32, 35, 36, 40, 41, 43), 2.5 ms (34), or 3 ms (40). 
+LICI was assessed in one study using an ISI of 100 ms (43). cSP was assessed in two studies (10, 29) and 
+iSP in two studies (26, 27). ICF was assessed in seven studies, with ISI of 10 ms in four studies (11, 28, 
+35, 36) and 12 ms in three studies (34, 37, 43). SICF was assessed in three studies using ISIs of 1.2 ms 
+(11), 1.5 ms (28, 35), and 2.5 ms (11).
+
+### Association Between Physical Activity and Neurophysiological Measures
+       Two authors provided correlation coefficients for CSE (29, 30) and one for cSP (29). Twelve authors 
+provided raw data for CSE (11, 31–36, 38–41,43), nine for SICI (11, 32, 34–36, 40–43), one for LICI 
+(43), six for ICF (11, 34–37, 43), and two for and SICF (11, 35). In four studies, correlation coefficients 
+were computed from p values or t-statistics) and sample sizes for SICI (10, 28), ICF (28); SICF (28), cSP 
+(10), and iSP (26, 27).
+       Overall, the meta-analysis included twenty Pearson’s r correlation coefficients for CSE derived from 
+fourteen studies (11, 29–36, 38–41, 43), thirteen for SICI from eleven studies (10, 11, 28, 32, 34–36, 
+40–43), eight for ICF from seven studies (11, 28, 34–37, 43), five for SICF from three studies (11, 28, 
+35), two for iSP (26, 27) and two for cSP (10, 29) (Table 1).
+
+*Table 1. is accessible on the offical publication.*
+
+## Meta-Analysis
+### Corticospinal Excitability
+       A total of 20 correlation estimates from 16 studies (600 participants) were included in the meta-
+analysis examining the association between physical activity and corticospinal excitability. The multilevel 
+random-effects  meta-analysis  indicated  no  significant  association  between  physical  activity  and 
+corticospinal excitability (r = −0.03, 95% CI [−0.12, 0.06], p = 0.51) (Fig. 2). The prediction interval 
+ranged from −0.12 to 0.07, indicating that future studies are expected to observe correlations ranging 
+from  small  negative  to  small  positive  values.  Between-study  heterogeneity  was  negligible  (total  I²  = 
+0.15%), with virtually no variance attributable to differences between studies. 
+       To  further  evaluate  whether  the  association  could  be  considered  practically  negligible,  an 
+equivalence test was conducted using equivalence bounds corresponding to a small effect size (−0.10 to 
+0.10).  The  equivalence  test  was  significant  (Z  =  1.66,  p  =  0.049),  and  the  90%  confidence  interval 
+(−0.100 to 0.042) fell entirely within the predefined equivalence bounds, supporting the conclusion that 
+the association between physical activity and corticospinal excitability is negligible.
+       Subgroup analyses comparing physical activity measures (self-reported vs. device-based) showed no 
+significant difference between measure types (Q = 0.28, p = 0.601). The pooled estimate was −0.05 (95% 
+CI [−0.16, 0.07], k = 14) for self-reported measures and r = 0.00 (95% CI [−0.16, 0.17]; k = 6) for device-
+based measures.
+
 ```{r Forest plot excitability, fig.height=7, fig.width=14}
 forest(m.excitability, 
        layout = "Revman5", 
@@ -171,9 +437,33 @@ forest(m.excitability,
        col.subgroup = "black",
        addrows.below.overall = 2)
 ```
+**Figure 2.** Forest plot of the association between physical activity and corticospinal 
+excitability. Notes: IV = inverse variance, CI = confidence interval.
+
+### Cortical Inhibition
+       A total of 18 correlation estimates from 14 studies (610 participants) were included in the meta-
+analysis examining the association between habitual physical activity and measures of cortical inhibition. 
+The multilevel random-effects meta-analysis indicated a significant positive association between physical 
+activity and cortical inhibition (r = 0.02, 95% CI [−0.10, 0.15], p = 0.70) (Fig. 3). The prediction interval 
+ranged from −0.31 to 0.35, indicating that future studies are expected to observe correlations ranging 
+from  moderately  negative  to  moderately  positive  values.  Between-study  heterogeneity  was  moderate 
+(total  I²  of  40.99%),  with  variability  occurring  almost  entirely  between  studies,  with  no  meaningful 
+heterogeneity between effect sizes within studies. 
+       The equivalence test was not significant (Z = −1.28, p = 0.100), and the 90% confidence interval 
+(−0.074 to 0.122) extended beyond the predefined equivalence bounds. Thus, equivalence could not be 
+concluded.
+       Subgroup analyses examining differences across inhibitory mechanisms (SICI, LICI, cSP, and iSP) 
+revealed statistically significant differences between modulation types (Q = 5.71, p = 0.009) (Fig. 3). The 
+association  was  significant  for  iSP  (r  =  0.47,  95%  CI  [0.21,  0.66];  k  =  2),  whereas  no  significant 
+associations were observed for SICI (r = −0.07, 95% CI [−0.17, 0.04]; k = 13), LICI (r = 0.05, 95% CI 
+[−0.28, 0.37]; k = 1), or cSP (r = 0.14, 95% CI [−0.16, 0.42]; k = 2).
+       Subgroup analyses comparing physical activity measures (self-reported vs. device-based) showed no 
+significant difference between measure types (Q = 0.002, p = 0.888). The pooled estimate was r = 0.03 
+(95% CI [−0.11, 0.17]; k = 16) for self-reported measures and −0.01 (95% CI [−0.41, 0.40]; k = 2) for 
+device-based measures.
 
 
-Excitability (CSE): Save plot
+*Excitability (CSE): Save plot*
 ```{r Forest plot excitability export SVG, echo=TRUE}
 
 library(svglite)
@@ -193,7 +483,7 @@ dev.off()
 
 ```
 
-## Inhibition (SICI, LICI, cSP, iSP): Primary analysis of using metafor::rma.mv()
+*Inhibition (SICI, LICI, cSP, iSP): Primary analysis of using metafor::rma.mv()*
 ```{r primary inhibition meta-analysis RE REML using metafor}
 m.cor.inhibition <- rma.mv(yi = z, # pool correlation coefficients Fishers Z transformation https://bookdown.org/mwheymans/bookmi/pooling-correlation-coefficients-1.html
                 V = var.z, # sampling variance of Fisher's Z values: 1/(N−3), where N = the sample size.
@@ -205,27 +495,21 @@ m.cor.inhibition <- rma.mv(yi = z, # pool correlation coefficients Fishers Z tra
 summary(m.cor.inhibition)
 ```
 
-### Inhibition (SICI, LICI, cSP, iSP): Converting Fisher's z back to Pearson's r
-
+*Inhibition (SICI, LICI, cSP, iSP): Converting Fisher's z back to Pearson's r*
 ```{r Convert inhibition Fisher z back to Pearsons r}
 round(convert_z2r(0.0237), 2) # point estimate
 round(convert_z2r(-0.1021), 2) # lower CI
 round(convert_z2r(0.1496), 2) # Upper CI
 ```
 
-### Inhibition (SICI, LICI, cSP, iSP): Explore heterogeneity
-
+*Inhibition (SICI, LICI, cSP, iSP): Explore heterogeneity*
 ```{r inhibition Heterogeneity}
 i2 <- var.comp(m.cor.inhibition)
 summary(i2)
 plot(i2)
 ```
 
-ADD TEXT
-
-
-## Inhibition (SICI, LICI, cSP, iSP): Sensitivity analysis using meta::metacor()
-
+*Inhibition (SICI, LICI, cSP, iSP): Sensitivity analysis using meta::metacor()*
 ```{r Primary inhibition analysis using meta}
 m.inhibition <- metacor(cor = cor, 
               n = n,
@@ -241,10 +525,8 @@ m.inhibition <- metacor(cor = cor,
 m.inhibition
 ```
 
-#Cortical inhibition
-ADD TEXT
-
-## Inhibition (SICI, LICI, cSP, iSP): Forest plot
+*Cortical inhibition*
+*Inhibition (SICI, LICI, cSP, iSP): Forest plot*
 ```{r Forest plot for inhibition, fig.height=7, fig.width=14}
 forest(m.inhibition, 
        layout = "Revman5", 
@@ -257,7 +539,7 @@ forest(m.inhibition,
 ```
 
 
-Inhibition (SICI, LICI, cSP, iSP): Save plot
+*Inhibition (SICI, LICI, cSP, iSP): Save plot*
 ```{r Forest plot inhibition export SVG, echo=TRUE}
 
 library(svglite)
@@ -278,7 +560,7 @@ dev.off()
 ```
 
 
-## Facilitation (ICF, SICF): Primary analysis of using metafor::rma.mv()
+*Facilitation (ICF, SICF): Primary analysis of using metafor::rma.mv()*
 ```{r primary facilitation meta-analysis RE REML using metafor}
 m.cor.facilitation <- rma.mv(yi = z, # pool correlation coefficients Fishers Z transformation https://bookdown.org/mwheymans/bookmi/pooling-correlation-coefficients-1.html
                 V = var.z, # sampling variance of Fisher's Z values: 1/(N−3), where N = the sample size.
@@ -290,27 +572,21 @@ m.cor.facilitation <- rma.mv(yi = z, # pool correlation coefficients Fishers Z t
 summary(m.cor.facilitation)
 ```
 
-### Facilitation (ICF, SICF): Converting Fisher's z back to Pearson's r
-
+*Facilitation (ICF, SICF): Converting Fisher's z back to Pearson's r*
 ```{r Convert facilitation Fisher z back to Pearsons r}
 round(convert_z2r(0.0674), 2) # point estimate
 round(convert_z2r(-0.0449), 2) # lower CI
 round(convert_z2r(0.1797), 2) # Upper CI
 ```
 
-### Facilitation (ICF, SICF): Explore heterogeneity
-
+*Facilitation (ICF, SICF): Explore heterogeneity*
 ```{r facilitation Heterogeneity}
 i2 <- var.comp(m.cor.facilitation)
 summary(i2)
 plot(i2)
 ```
 
-ADD TEXT
-
-
-## Facilitation (ICF, SICF): Sensitivity analysis using meta::metacor()
-
+*Facilitation (ICF, SICF): Sensitivity analysis using meta::metacor()*
 ```{r Primary facilitation analysis using meta}
 m.facilitation <- metacor(cor = cor, 
               n = n,
@@ -326,10 +602,8 @@ m.facilitation <- metacor(cor = cor,
 m.facilitation
 ```
 
-#Cortical Facilitation
-ADD TEXT
-
-## Facilitation (ICF, SICF): Forest plot
+*Cortical Facilitation*
+*Facilitation (ICF, SICF): Forest plot*
 ```{r Forest plot facilitation, fig.height=7, fig.width=14}
 forest(m.facilitation, 
        layout = "Revman5", 
@@ -340,9 +614,33 @@ forest(m.facilitation,
        col.subgroup = "black",
        addrows.below.overall = 2)
 ```
+**Figure 3.** Forest plot of the association between habitual physical activity and TMS 
+measures of cortical inhibition. Notes: SICI = short-interval intracortical inhibition, LICI = 
+long-interval intracortical inhibition, cSP = cortical silent period, iSP = ipsilateral silent 
+period, IV = inverse variance, CI = confidence interval.
+
+### Intracortical Facilitation
+       A  total  of  14  correlation  estimates  from  8  studies  (412  participants)  were  included  in  the  meta-
+analysis  examining  the  association  between  habitual  physical  activity  and  TMS  measures  of  cortical 
+facilitation. The multilevel random-effects meta-analysis indicated no statistically significant association 
+between  physical  activity  and  cortical  facilitation  (r  =  0.07,  95%  CI  [−0.04,  0.18],  p  =  0.22).  The 
+prediction interval ranged from −0.04 to 0.18, indicating that future studies would be expected to observe 
+correlations ranging from slightly negative to small positive values. No meaningful heterogeneity was 
+observed across studies (I² = 0%), indicating that variability in the observed correlations was entirely 
+attributable to sampling error. Variance decomposition confirmed that neither between-study nor within-
+study variance components contributed meaningfully to heterogeneity.
+       The equivalence test was not significant (Z = −0.63, p = 0.263), and the 90% confidence interval 
+(−0.018 to 0.153) extended beyond the predefined equivalence bounds. Thus, equivalence could not be 
+concluded.
+       Subgroup analyses comparing facilitatory measures (ICF vs. SICF) showed no significant difference 
+between measure types (Q = 0.002, p = 0.966) (Fig. 4). Point estimates were similar for ICF (r = 0.07, 
+95% CI [−0.07, 0.21]; k = 9) and SICF (r = 0.06, 95% CI [−0.13, 0.25]; k = 5).
+       Subgroup analyses comparing physical activity measures (self-reported vs. device-based) showed no 
+significant difference between measure types (Q = 0.59, p = 0.458). The pooled estimate for self-reported 
+measures was r = 0.08 (95% CI [−0.04, 0.20]; k = 13), whereas only one study and there was only a single 
+study using a device-based measure (r = −0.05, 95% CI [−0.37, 0.29]; k = 1).
 
 
-Facilitation (ICF, SICF): Save plot
 ```{r Forest plot facilitation export SVG, echo=TRUE}
 
 library(svglite)
@@ -362,8 +660,8 @@ dev.off()
 
 ```
 
-# Meta-analysis: Subgroup analyses
-## Inhibition measure
+*Meta-analysis: Subgroup analyses*
+*Inhibition measure*
 ```{r Subgroup analysis by inhibitory measure using metafor}
 inhibition_r$inhibitory.measure <- as.factor(inhibition_r$inhibitory.measure)
 
@@ -379,15 +677,10 @@ inhibition_tms_subg <- rma.mv(yi = z,
 summary(inhibition_tms_subg)
 ```
 
-ADD TEXT
-
-
 ```{r inhibition by measure type meta, warning=FALSE}
 inhibition_measure_type <- update(m.inhibition, subgroup = inhibitory.measure, tau.common = TRUE)
 inhibition_measure_type
 ```
-
-ADD TEXT
 
 ```{r Forest plot for inhibition type using meta, fig.height=10, fig.width=14}
 forest(inhibition_measure_type, 
@@ -400,7 +693,7 @@ forest(inhibition_measure_type,
        addrows.below.overall = 2)
 ```
 
-Inhibition measure type: Save plot
+*Inhibition measure type: Save plot*
 ```{r Forest plot inhibition type export SVG, echo=TRUE}
 
 library(svglite)
@@ -420,7 +713,7 @@ dev.off()
 
 ```
 
-## Facilitation Measure
+*Facilitation Measure*
 
 ```{r Subgroup analysis by facilitation type using metafor}
 facilitation_r$facilitatory.measure <- as.factor(facilitation_r$facilitatory.measure)
@@ -456,7 +749,7 @@ forest(facilitation_measure_type,
        addrows.below.overall = 2)
 ```
 
-Facilitation by tms measure type: Save plot
+*Facilitation by tms measure type: Save plot*
 ```{r Forest plot facilitation type SVG, echo=TRUE}
 
 library(svglite)
@@ -476,7 +769,7 @@ dev.off()
 
 ```
 
-## Physical Activity Objectivity for Excitability
+*Physical Activity Objectivity for Excitability*
 
 ```{r Subgroup analysis by physical activity objectivity for excitability using metafor}
 excitability_r$PA_objectivity <- as.factor(excitability_r$PA_objectivity)
@@ -512,7 +805,7 @@ forest(excitability_PA_type,
        addrows.below.overall = 2)
 ```
 
-excitability by PA measure type: Save plot
+*Excitability by PA measure type: Save plot*
 ```{r Forest plot excitability PA type SVG, echo=TRUE}
 
 library(svglite)
@@ -532,7 +825,7 @@ dev.off()
 
 ```
 
-## Physical Activity Objectivity for Inhibition
+*Physical Activity Objectivity for Inhibition*
 
 ```{r Subgroup analysis by physical activity objectivity for inhibition using metafor}
 inhibition_r$PA_objectivity <- as.factor(inhibition_r$PA_objectivity)
@@ -567,7 +860,7 @@ forest(inhibition_PA_type,
        addrows.below.overall = 2)
 ```
 
-Inhibition by PA measure type: Save plot
+*Inhibition by PA measure type: Save plot*
 ```{r Forest plot inhibition PA type SVG, echo=TRUE}
 
 library(svglite)
@@ -587,7 +880,7 @@ dev.off()
 
 ```
 
-## Physical Activity Objectivity for Facilitation
+*Physical Activity Objectivity for Facilitation*
 
 ```{r Subgroup analysis by physical activity objectivity for facilitation using metafor}
 facilitation_r$PA_objectivity <- as.factor(facilitation_r$PA_objectivity)
@@ -621,7 +914,7 @@ forest(facilitation_PA_type,
        addrows.below.overall = 2)
 ```
 
-Facilitation by tms measure type: Save plot
+*Facilitation by tms measure type: Save plot*
 ```{r Forest plot facilitation PA type SVG, echo=TRUE}
 
 library(svglite)
@@ -641,66 +934,66 @@ dev.off()
 
 ```
 
-# Meta Regressions
-## Excitability
-### Meta-regressions by proportion of women
+*Meta Regressions*
+*Excitability*
+*Meta-regressions by proportion of women*
 ```{r Meta-regression by proportion of women excitability}
 m.cor.reg.excitability.women <- metareg(m.excitability, ~Prop_women)
 m.cor.reg.excitability.women
 ```
 
-### Meta-regressions by age
+*Meta-regressions by age*
 ```{r Meta-regression by age excitability}
 m.cor.reg.excitability.age <- metareg(m.excitability, ~Age)
 m.cor.reg.excitability.age
 ```
 
-### Meta-regressions by study quality
+*Meta-regressions by study quality*
 ```{r Meta-regression by study quality excitability}
 m.cor.reg.excitability.quality <- metareg(m.excitability, ~Q_score)
 m.cor.reg.excitability.quality
 ```
 
-## Inhibition
-### Meta-regressions by proportion of women
+*Inhibition*
+*Meta-regressions by proportion of women*
 ```{r Meta-regression by proportion of women inhibition}
 m.cor.reg.inhibition.women <- metareg(m.inhibition, ~Prop_women)
 m.cor.reg.inhibition.women
 ```
 
-### Meta-regressions by age
+*Meta-regressions by age*
 ```{r Meta-regression by age inhibition}
 m.cor.reg.inhibition.age <- metareg(m.inhibition, ~Age)
 m.cor.reg.inhibition.age
 ```
 
-### Meta-regressions by study quality
+*Meta-regressions by study quality*
 ```{r Meta-regression by study quality inhibition}
 m.cor.reg.inhibition.quality <- metareg(m.inhibition, ~Q_score)
 m.cor.reg.inhibition.quality
 ```
 
-## Facilitation
-### Meta-regressions by proportion of women
+*Facilitation*
+*Meta-regressions by proportion of women*
 ```{r Meta-regression by proportion of women facilitation}
 m.cor.reg.facilitation.women <- metareg(m.facilitation, ~Prop_women)
 m.cor.reg.facilitation.women
 ```
 
-### Meta-regressions by age
+*Meta-regressions by age*
 ```{r Meta-regression by age facilitation}
 m.cor.reg.facilitation.age <- metareg(m.facilitation, ~Age)
 m.cor.reg.facilitation.age
 ```
 
-### Meta-regressions by study quality
+*Meta-regressions by study quality*
 ```{r Meta-regression by study quality facilitation}
 m.cor.reg.facilitation.quality <- metareg(m.facilitation, ~Q_score)
 m.cor.reg.facilitation.quality
 ```
 
-# Equivalence Testing
-## Excitability
+*Equivalence Testing*
+*Excitability*
 ```{r Equivalence testing excitability}
 
 # Define SESOI in r
@@ -718,7 +1011,8 @@ TOSTmeta(
   alpha = 0.05
 )
 ```
-## Inhibition
+
+*Inhibition*
 ```{r Equivalence testing inhibition}
 
 # Define SESOI in r
@@ -738,7 +1032,7 @@ TOSTmeta(
 ```
 
 
-## Facilitation
+*Facilitation*
 ```{r Equivalence testing facilitation}
 
 # Define SESOI in r
@@ -758,9 +1052,9 @@ TOSTmeta(
 ```
 
 
-# Publication bias analysis
-## Small-study effects
-### Funnel plot 
+*Publication bias analysis*
+*Small-study effects*
+*Funnel plot*
 
 ```{r Contour-enhanced funnel plot excitability, fig.height=6, fig.width=8}
 # Define fill colors for contour
@@ -843,9 +1137,7 @@ legend(x =0.5, y = 0.01,
 title("Contour-Enhanced Funnel Plot (facilitation)")
 ```
 
-### Egger's test
-ADD TEXT
-
+*Egger's test*
 ```{r Eggers test for excitability}
 test.egger = rma.mv(z,var.z, mod = ~ sqrt(var.z), random =  ~ 1 | author/cor_id, data = excitability_r, test = "t")
 test.egger
@@ -862,18 +1154,163 @@ test.egger
 test.egger = rma.mv(z,var.z, mod = ~ sqrt(var.z), random =  ~ 1 | author/cor_id, data = facilitation_r, test = "t")
 test.egger
 ```
-#Pulication Bias
-ADD TEXT
+**Figure 4.** Forest plot of the association between habitual physical activity and 
+transcranial magnetic stimulation measures of intracortical facilitation. Notes: ICF = 
+intracortical facilitation, SICF = short-interval intracortical facilitation, IV = inverse 
+variance, CI = confidence interval.
+
+### Meta-Regressions
+Meta-regression analyses indicated that the association between physical activity and TMS measures 
+was not significantly moderated by the proportion of women, mean participant age, or study quality (all p 
+≥ 0.105).
+
+### Publication Bias
+       Potential publication bias and small-study effects were assessed using contour-enhanced funnel plots 
+and Egger’s regression tests. Visual inspection of the funnel plots for corticospinal excitability, cortical 
+inhibition, and cortical facilitation did not reveal substantial asymmetry around the pooled effect sizes.
+       Egger’s  regression  tests  conducted  using  the  meta-regression  approach  were  not  statistically 
+significant  for  any  of  the  meta-analyses.  The  regression  coefficient  for  the  standard  error  was  not 
+significant for corticospinal excitability (p = 0.86), cortical inhibition (p = 0.71), or cortical facilitation (p 
+= 0.16). These results indicate that smaller studies did not systematically report larger effect sizes.
+
+# Discussion
+## Main findings
+       This  systematic  review  and  meta-analysis  examined  the  association  between  habitual  physical 
+activity  and  motor  cortical  physiology  assessed  using  transcranial  magnetic  stimulation.  The  results 
+revealed no reliable associations across neurophysiological measures. Specifically, physical activity was 
+not  statistically  associated  with  corticospinal  excitability  and  showed  no  evidence  of  association  with 
+cortical inhibition or intracortical facilitation.
+       Specifically,  for  corticospinal  excitability,  the  pooled  correlation  was  close  to  zero,  with  narrow 
+confidence  intervals  and  negligible  heterogeneity.  Equivalence  testing  further  demonstrated  that  this 
+effect was statistically equivalent to zero, providing evidence that habitual physical activity is unlikely to 
+be meaningfully associated with corticospinal excitability. For cortical inhibition, the pooled association 
+was small and non-significant, with moderate heterogeneity and wide prediction intervals, indicating that 
+effects may vary across studies and populations. Subgroup analyses revealed differences across inhibitory 
+mechanisms, with a significant positive association observed for iSP, but no significant associations for 
+SICI,  cSP,  or  LICI,  suggesting  that  variability  in  inhibitory  processes  may  be  driven  by  specific 
+neurophysiological mechanisms rather than a general effect of physical activity. For cortical facilitation, 
+the pooled correlation was small and non-significant, with no observed heterogeneity. Equivalence testing 
+indicated that the effect could not be considered statistically equivalent to zero. Consequently, while the 
+available  evidence  does  not  support  a  meaningful  relationship  between  habitual  physical  activity  and 
+cortical facilitation, small effects cannot be ruled out.
+       Taken together, these findings suggest that habitual physical activity is not reliably associated with 
+motor cortical physiology. Any potential relationships appear to be small, inconsistent, and dependent on 
+specific inhibitory mechanisms rather than reflecting a global effect across motor cortical systems
+
+## Acute exercise versus habitual physical activity effects on motor cortical physiology
+       A  recent  meta-analysis  demonstrated  that  a  single  bout  of  acute  aerobic  exercise  transiently 
+modulates motor cortical physiology (6). Specifically, acute aerobic exercise produced a small increase in 
+SICI  (g  =  0.27),  with  stronger  effects  observed  at  moderate  and  high  exercise  intensities,  and  these 
+changes persisted for up to 30 minutes following exercise. In contrast, increases in CSE were observed 
+only following high-intensity exercise and were generally small in magnitude, while effects on ICF and 
+LICI were not statistically significant. 
+       In  comparison,  the  present  meta-analysis  of  habitual  physical  activity  revealed  no  reliable 
+associations  with  CSE,  cortical  inhibition,  or  cortical  facilitation.  Notably,  CSE  was  statistically 
+equivalent  to  zero,  indicating  that  the  transient  increases  observed  following  acute  exercise  do  not 
+translate into persistent differences in corticospinal output. For inhibitory processes, although no overall 
+association with habitual physical activity was observed, variability across studies was substantial and 
+appeared to be driven by specific mechanisms, with iSP showing a significant positive association, in 
+contrast to the absence of effects for SICI, cSP, and LICI. Facilitation (ICF/SICF) similarly showed no 
+significant or equivalent effects, suggesting that any relationship with habitual physical activity is likely 
+small or inconsistent.
+       Together, these findings suggest a dissociation between the transient neurophysiological effects of 
+acute  exercise  and  the  absence  of  consistent  long-term  adaptations  associated  with  habitual  physical 
+activity. Acute exercise appears to induce short-lived modulation of motor cortical circuits, particularly within  inhibitory  networks,  whereas  habitual  physical  activity  is  not  associated  with  stable,  global 
+changes  in  motor  cortical  physiology.  Instead,  any  long-term  adaptations  may  be  subtle,  context-
+dependent, and restricted to specific inhibitory mechanisms such as interhemispheric interactions. These 
+results further suggest that GABAergic inhibitory circuits may be acutely sensitive to exercise, but do not 
+necessarily exhibit sustained plastic changes in relation to habitual physical activity levels.
+
+## Limitations
+Several limitations should be considered when interpreting the findings of this systematic review and 
+meta-analysis. First, the analyses were based on correlational data and therefore do not permit conclusions 
+regarding  causal  relationships.  Second,  the  available  literature  was  limited  for  several  TMS-derived 
+measures of motor cortical physiology. While sufficient studies were available to synthesize associations 
+for CSE, cortical inhibition, and intracortical facilitation, the number of studies examining each specific 
+inhibitory  and  facilitatory  process  was  relatively  low.  Third,  most  studies  assessing  physical  activity 
+relied  on  self-reported  questionnaires,  which  may  be  subject  to  recall  bias  and  measurement  error 
+compared  with  device-based  approaches  such  as  accelerometry.  Fourth,  many  eligible  studies  did  not 
+report the correlation coefficients or sufficient statistical information required for meta-analysis. Of the 53 
+studies that met our inclusion criteria, usable data were available for only 17 (36%). This limited data 
+availability  raises  the  possibility  of  availability  bias  and  may  have  influenced  the  pooled  estimates. 
+Finally,  variability  in  TMS  methodologies  across  studies  (e.g.,  including  differences  in  stimulation 
+parameters, interstimulus intervals, and participant characteristics) may have contributed to heterogeneity 
+in  the  reported  neurophysiological  measures.  Future  research  using  larger  samples,  standardized 
+neurophysiological protocols, and objective assessments of physical activity will be important to better 
+clarify the relationship between habitual physical activity and motor cortical physiology.
+
+## Conclusion
+Overall, these findings suggest that habitual physical activity is unlikely to be associated with 
+global  or  robust  differences  in  motor  cortical  neurophysiology.  Future  studies  using  larger  samples, 
+standardized  TMS  protocols,  and  objective  assessments  of  physical  activity  are  needed  to  determine 
+whether physical activity may instead relate to more specific or higher-order neural processes beyond 
+primary motor cortex.
+
+# Data availability
+The  data  and  analysis  scripts  used  in  this  study  are  available  in  a  public  repository 
+(https://github.com/Boisgontier-Lab/TMS-MetaAnalysis).
+
+# Grants
+MPB is supported by the Natural Sciences and Engineering Research Council of Canada (NSERC) 
+(RGPIN-2021-03153), the Canada Foundation for Innovation (CFI 43661), and Mitacs. AF is supported 
+by an Admission Scholarship, a Doctoral International Scholarship, a Special Merit Scholarship from the 
+University  of  Ottawa,  and  a  BMO  Graduate  Scholarship.  KP  is  supported  by  Mitacs  and  an  NSERC 
+postdoctoral fellowship.
+
+# Disclosures
+No conflicts of interest, financial, or otherwise, are declared by the authors.
+
+# Author contributions
+A.F.  and  M.P.B.  conceptualized  the  study;  A.F.,  K.P.  and  M.P.B.  contributed  to  study 
+selection, data extraction and study quality assessment; A.F., I.M.L, and M.P.B. analyzed the 
+data; A.F., T.D. and M.P.B.  contributed to data curation and posting on public repositories; A.F. 
+and  M.P.B.  wrote  the  original  draft;  K.P.,  I.M.L.  and  A.N.C.  reviewed  and  edited  the  draft; 
+M.P.B. supervised A.F., K.P. and T.D.; M.P.B. administrated the project and acquired funds to 
+support  it.  A.F.,  K.P.,  T.D.,  I.M.L.,  A.N.C.  and  M.P.B.  approved  the  final  version  of  the 
+manuscript.
+
 
 # References
-- Cohen J. Statistical power analysis for the behavioral sciences. 2nd ed.; 1988.  
-- Egger M, Davey Smith G, Schneider M, Minder C. Bias in meta-analysis detected by a simple, graphical test. BMJ. 1997;315(7109):629-634. https://doi.org/10.1136/bmj.315.7109.62  
-- Higgins JPT, Thompson SG. Quantifying heterogeneity in a meta-analysis. Stat Med. 2002;21(11):1539-1558. https://doi.org/10.1002/sim.1186 
-- Knapp G, Hartung J. Improved tests for a random effects meta-regression with a single covariate. Stat Med. 2003;22(17):2693-2710. https://doi.org/10.1002/sim.1482  
-- R Core Team. R: A language and environment for statistical computing [Computer software]. Version 4.3.1. Vienna, Austria: Foundation for Statistical Computing; 2023. https://www.r-project.org 
-- Schwarzer G. Meta: General package for meta-analysis [R package]. Version 6.5-0; 2023. https://cran.r-project.org/web/packages/meta/meta.pdf 
-- Simonsohn U, Nelson LD, Simmons JP. P-curve: A key to the file-drawer. J Exp Psychol Gen. 2014;143(2):534-547. http://doi.org/10.1037/a0033242  
-- Viechtbauer W. Bias and efficiency of meta-analytic variance estimators in the random-effects model. J Educ Behav Stat. 2005;30(3):261-293. https://doi.org/10.3102/10769986030003261  
-- Viechtbauer W. Conducting meta-analyses in R with the metafor package. J Stat Softw. 2010;36(3):1-48. https://doi.org/10.18637/jss.v036.i03  
-- Viechtbauer W. Metafor: Meta-analysis package for R [R package]. Version 4.2-0; 2023. https://cran.r-pro-ject.org/web/packages/metafor/metafor.pdf  
-- Viechtbauer, "W. (2023). Metafor: Meta-Analysis Package for R (Version 4.2-0) [R pakage]. https://cran.r-project.org/web/packages/metafor/metafor.pdf  
+- Strick PL, Dum RP, Rathelot JA. The cortical motor areas and the emergence of motor skills: a neuroanatomical  perspective.  Annu Rev Neurosci  44:  425–447,  2021.  doi:10.1146/annurev-neuro-070918-050216.
+- Derosiere G, Duque J. Tuning the corticospinal system: how distributed brain circuits shape human actions. Neuroscientist 26: 359–379, 2020. doi:10.1177/1073858419896751.
+- Pascual-Leone A, Amedi A, Fregni F, Merabet LB. The plastic human brain cortex. Annu Rev Neurosci 28: 377–401, 2005. doi:10.1146/annurev.neuro.27.070203.144216.
+- Bull FC, Al-Ansari SS, Biddle S, Borodulin K, Buman MP, Cardon G, Carty C, Chaput JP, Chastin S, Chou R, Dempsey PC, DiPietro L, Ekelund U, Firth J, Friedenreich CM, Garcia L, Gichu  M,  Jago  R,  Katzmarzyk  PT,  Lambert  E,  Leitzmann  M,  Milton  K,  Ortega  FB, Ranasinghe C, Stamatakis E, Tiedemann A, Troiano RP, van der Ploeg HP, Wari V, Willumsen JF. World Health Organization 2020 guidelines on physical activity and sedentary behaviour. Br J Sports Med 54: 1451–1462, 2020. doi:10.1136/bjsports-2020-102955.
+- Mellow ML, Goldsworthy MR, Coussens S, Smith AE. Acute aerobic exercise and neuroplasticity of  the  motor  cortex:  a  systematic  review.  J  Sci  Med  Sport  23:  408–414,  2020. doi:10.1016/j.jsams.2019.10.015.
+- Youssef  L,  Harroum  N,  Francisco  BA,  Johnson  L,  Arvisais  D,  Pageaux  B,  Romain  AJ, Hayward KS, Neva JL. Neurophysiological effects of acute aerobic exercise in young adults: a systematic  review  and  meta-analysis.  Neurosci  Biobehav  Rev  164:  105811,  2024.  doi: 10.1016/j.neubiorev.2024.105811.
+- Rasmussen P, Brassard P, Adser H, Pedersen MV, Leick L, Hart E, Secher NH, Pedersen BK, Pilegaard H.  Evidence  for  a  release  of  brain-derived  neurotrophic  factor  from  the  brain  during exercise. Exp Physiol 94: 1062–1069, 2009. doi:10.1113/expphysiol.2009.048512.
+- Skriver K, Roig M, Lundbye-Jensen J, Pingel J, Helge JW, Kiens B, Nielsen JB. Acute exercise improves motor memory: exploring potential biomarkers. Neurobiol Learn Mem 116: 46–58, 2014. doi:10.1016/j.nlm.2014.08.004.
+- El-Sayes J, Harasym D, Turco CV, Locke MB, Nelson AJ. Exercise-induced neuroplasticity: a mechanistic  model  and  prospects  for  promoting  plasticity.  Neuroscientist  25:  65–85,  2019. doi:10.1177/1073858418771538. 
+- Cirillo J, Lavender AP, Ridding MC, Semmler JG. Motor cortex plasticity induced by paired associative stimulation is enhanced in physically active individuals. J Physiol 587: 5831–5842, 2009. doi:10.1113/jphysiol.2009.181834.
+- Lulic T, El-Sayes J, Fassett HJ, Nelson AJ. Physical activity levels determine exercise-induced changes in brain excitability. PLoS One 12: e0173672, 2017. doi:10.1371/journal.pone.0173672.
+- Kujirai T, Caramia MD, Rothwell JC, Day BL, Thompson PD, Ferbert A, Wroe S, Asselman P, Marsden CD.  Corticocortical  inhibition  in  human  motor  cortex.  J Physiol  471:  501–519,  1993. doi:10.1113/jphysiol.1993.sp019912.
+- Ziemann U, Rothwell JC, Ridding MC. Interaction between intracortical inhibition and facilitation in human motor cortex. J Physiol 496: 873–881, 1996. doi:10.1113/jphysiol.1996.sp021734.
+- Hupfeld KE, Swanson CW, Fling BW, Seidler RD.  TMS-induced  silent  periods:  A  review  of methods  and  call  for  consistency.  J  Neurosci  Methods  346:  108950,  2020. doi:10.1016/j.jneumeth.2020.108950.
+- Page MJ, Moher D, Bossuyt PM, Boutron I, Hoffmann TC, Mulrow CD, Shamseer L, Tetzlaff JM, Akl EA, Brennan SE, Chou R, Glanville J, Grimshaw JM, Hróbjartsson A, Lalu MM, LiT, Loder EW, Mayo-Wilson E, McDonald S, McGuinness LA, Stewart LA, Thomas J, Tricco AC, Welch VA, Whiting P, McKenzie JE. PRISMA 2020 explanation and elaboration: updated guidance  and  exemplars  for  reporting  systematic  reviews.  BMJ  372:  n160,  2021. doi:10.1136/bmj.n160.
+- Downs SH, Black N. The feasibility of creating a checklist for the assessment of the methodological quality both of randomised and non-randomised studies of health care interventions. J Epidemiol Community Health 52: 377–384, 1998. doi:10.1136/jech.52.6.377.
+- R Core Team. R: a language and environment for statistical computing. R Foundation for Statistical Computing. Version 4.4.1 (software), 2024. R-project.org.
+- Viechtbauer W. metafor: meta-analysis package for R. Version 4.6-0 (R package), 2023. Available from: https://cran.r-project.org/web/packages/metafor/metafor.pdf.
+- Schwarzer G. meta: general package for meta-analysis. Version 8.1-0 (R package), 2023. Available from: https://cran.r-project.org/web/packages/meta.
+- Viechtbauer  W.  Bias  and  efficiency  of  meta-analytic  variance  estimators  in  the  random-effects model. J Educ Behav Stat 30: 261–293, 2005. doi:10.3102/10769986030003261.
+- Higgins  JPT,  Thompson  SG.  Quantifying  heterogeneity  in  a  meta-analysis.  Stat  Med  21: 1539–1558, 2022. doi:10.1002/sim.1186.
+- Knapp G, Hartung J. Improved tests for a random effects meta-regression with a single covariate. Stat Med 22: 2693–2710, 2003. doi:10.1002/sim.1482.
+- Egger M, Davey Smith G, Schneider M, Minder C. Bias in meta-analysis detected by a simple, graphical test. BMJ 315: 629–634, 1997. doi:10.1136/bmj.315.7109.62.
+- Lakens D, Caldwell A. TOSTER: Two One-Sided Tests (TOST) equivalence testing. Version 0.8.4 (R package), 2025. Available from: https://cran.r-project.org/web/packages/TOSTER.
+- Lakens D.  Equivalence  tests:  a  practical  primer  for  t  tests,  correlations,  and  meta-analyses.  Soc Psychol Personal Sci 8: 355–362, 2017. doi:10.1177/1948550617697177.
+- McGregor KM, Zlatar Z, Kleim E, Sudhyadhom A, Bauer A, Phan S, Seeds L, Ford A, Manini TM, White KD, Kleim J, Crosson B. Physical activity and neural correlates of aging: a combined TMS/fMRI study. Behav Brain Res 222: 158–168, 2011. doi:10.1016/j.bbr.2011.03.042.
+- McGregor KM, Nocera JR, Sudhyadhom A, Patten C, Manini TM, Kleim JA, Crosson B, Butler AJ. Effects of aerobic fitness on aging-related changes of interhemispheric inhibition and motor performance. Front Aging Neurosci 5: 66, 2013. doi:10.3389/fnagi.2013.00066.
+- Hand BJ, Opie GM, Sidhu SK, Semmler JG. Motor cortex plasticity and visuomotor skill learning in upper and lower limbs of endurance-trained cyclists. Eur J Appl Physiol 122: 169–184, 2022a. doi:10.1007/s00421-021-04825-y.
+- Houde F, Laroche S, Thivierge V, Martel M, Harvey MP, Daigle F, Olivares-Marchant A, Beaulieu LD, Leonard G. Transcranial magnetic stimulation measures in the elderly: reliability, smallest detectable change and the potential influence of lifestyle habits. Front Aging Neurosci 10: 379, 2018. doi:10.3389/fnagi.2018.00379.
+- Smith AE, Dumuid D, Goldsworthy MR, Graetz L, Hodyl N, Thornton NLR, Ridding MC. Daily activities are associated with non-invasive measures of neuroplasticity in older adults. Clin Neurophysiol 132: 984–992, 2021. doi:10.1016/j.clinph.2021.01.016.
+- Hassanlouei H, Sundberg CW, Smith AE, Kuplic A, Hunter SK.  Physical  activity  modulates corticospinal excitability of the lower limb in young and old adults. J Appl Physiol 123: 364–374,2017. doi:10.1152/japplphysiol.01078.2016.
+- El-Sayes J, Turco CV, Skelly LE, Nicolini C, Fahnestock M, Gibala MJ, Nelson AJ. The effects of  biological  sex  and  ovarian  hormones  on  exercise-induced  neuroplasticity.  Neuroscience  410: 29–40, 2019. doi:10.1016/j.neuroscience.2019.04.054.
+- Rozand V, Senefeld JW, Sundberg CW, Smith AE, Hunter SK. Differential effects of aging and physical activity on corticospinal excitability of upper and lower limb muscles. J Neurophysiol 122: 241–250, 2019. doi:10.1152/jn.00077.2019.
+- Hu M, Zeng N, Gu Z, Zheng Y, Xu K, Xue L, Leng L, Lu X, Shen Y, Huang J. Short-term high-intensity  interval  exercise  promotes  motor  cortex  plasticity  and  executive  function  in  sedentary females. Front Hum Neurosci 15: 620958, 2021. doi:10.3389/fnhum.2021.620958.
+- Hand BJ, Opie GM, Sidhu SK, Semmler JG.  Motor  cortex  plasticity  is  greater  in  endurance-trained  cyclists  following  acute  exercise.  J  Appl  Physiol  133:  932–944,  2022b. doi:10.1152/japplphysiol.00213.2022.
+- Wang YR, Lefebvre G, Picard M, Lamoureux-Andrichuk A, Ferland MC, Therrien-Blanchet JM, Boré A, Tremblay J, Descoteaux M, Champoux F, Théoret H. Physiological, anatomical and metabolic  correlates  of  aerobic  fitness  in  human  primary  motor  cortex:  a  multimodal  study. Neuroscience 517: 70–83, 2023. doi:10.1016/j.neuroscience.2023.03.007.
+- Curtin D, Cadwallader CJ, Taylor EM, Andrews SC, Stout JC, Hendrikse JJ, Chong TT, Coxon JP. Ageing attenuates exercise-enhanced motor cortical plasticity. J Physiol 601: 5733–5750, 2023. doi:10.1113/JP285243.
+- Ross  RE,  Saladin  ME,  George  MS,  Gregory  CM.  Acute  effects  of  aerobic  exercise  on corticomotor plasticity in individuals with and without depression. J Psychiatr Res 176: 108–118, 2024. doi:10.1016/j.jpsychires.2024.06.002.
+- Hougland  JR,  Proessl  F,  Meglino  N,  Canino  MC,  Sterczala  AJ,  Connaboy  C,  Nindl  BC, Flanagan SD. Agreement and consistency of absolute and relative corticospinal stimulus-response curves for upper, lower, and axial musculature in healthy adults. J Clin Neurophysiol 42: 264–271, 2025. doi:10.1097/WNP.0000000000001109.
+- Digonet  G,  Lapole  T,  Gelebart  J,  Bouvier  J,  Blanco  L,  Magaud  J,  Pialoux  V,  Pingon  M, Stauffer  E,  Debarnot  U.  High-intensity  interval  exercise  affects  explicit  sequential  motor consolidation  with  both  physical  and  motor  imagery  practice.  Scand  J  Med  Sci  Sports  35(11): e70168, 2025. doi: 10.1111/sms.70168.
+- Harroum N, O'Farrell A, Youssef L, Bohbot L, Maati H, Joubert M, Pageaux B, Neva JL. Motor cortical excitability and inhibition are differentially modulated by aerobic exercise intensity. Cereb Cortex 35(8): bhaf230, 2025. doi: 10.1093/cercor/bhaf230.
+- Gamage  NN,  Liao  WY,  Atherton  PJ,  Piasecki  M,  Opie  GM,  Semmler  JG.  Transcranial alternating current stimulation improves ballistic motor performance in trained and untrained limbs of healthy older adults. Geroscience 48(2): 1589–1608, 2026. doi: 10.1007/s11357-025-02064-z.
+- Farajzadeh  A,  Boisgontier  MP.  Dataset  physical  activity  and  TMS.  GitHub  2026. https://github.com/Boisgontier-Lab/Dataset-physical-activity-and-TMS
