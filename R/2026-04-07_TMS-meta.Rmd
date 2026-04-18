@@ -35,6 +35,7 @@ Pearson product–moment correlations from eligible studies were pooled to exami
 between physical activity and TMS measures of cortico-spinal excitability, cortical inhibition, and cortical 
 facilitation.  Prior  to  analysis,  r  correlations  were  Fisher’s  z-transformed  to  stabilize  variance,  and  the 
 corresponding sampling variances were calculated.
+
 Meta-analyses  were  conducted  using  multilevel  random-effects  models  implemented  with  the 
 metafor  package  (18).  This  approach  accounts  for  statistical  dependence  among  multiple  correlation 
 estimates  reported  within  the  same  study.  A  multilevel  approach  was  used  because  several  studies 
@@ -48,46 +49,17 @@ quantified using the I² statistic, which represents the proportion of total var
 that is not attributable to sampling error (21). Because a multilevel meta-analytic model was used, I² 
 values were decomposed across variance components to estimate the proportion of variability attributable 
 to differences between studies and between effect sizes within studies.
+
 To  reduce  the  risk  of  inflated  type  I  error  rates,  confidence  intervals  for  pooled  estimates  were 
 calculated  using  a  Knapp–Hartung  adjustment  (22).  In  addition  to  pooled  correlations  and  their 
 confidence  intervals,  prediction  intervals  were  calculated  to  estimate  the  range  within  which  the  true 
 effect size of a future study is expected to fall based on the current evidence. Unlike confidence intervals, 
 which  describe  the  precision  of  the  pooled  estimate,  prediction  intervals  incorporate  between-study 
 heterogeneity to reflect the expected variability of effects across future studies.
+
 For visualization purposes, forest plots were produced using the meta package (19) with a RevMan 
 layout. These plots were based on random-effects models equivalent to the multilevel analyses.
 
-### Subgroup Meta-Analyses 
-Subgroup analyses were conducted to examine whether pooled correlations differed across types of 
-inhibitory (SICI, LICI, cSP, and iSP) and facilitatory measures (ICF and SICF), as well as by physical 
-activity assessment method (self-reported vs. device-based).
-
-### Meta-Regressions
-Meta-regression analyses were conducted to examine whether study-level characteristics, including 
-mean age and proportion of women were associated with the reported correlations.
-
-### Sensitivity Analysis
-A  sensitivity  analysis  was  conducted  to  examine  whether  the  quality  of  the  studies  affected  the 
-results. 
-
-### Publication Bias
-Potential publication bias and small-study effects were assessed using contour-enhanced funnel plots 
-and Egger’s regression tests. Funnel plots display the Fisher’s z-transformed correlations against their 
-standard errors to allow visual inspection of asymmetry around the pooled effect size. Egger’s regression 
-test  was  used  as  a  statistical  complement  to  the  visual  inspection  of  funnel  plots.  Because  no  direct 
-implementation  exists  for  multilevel  meta-analytic  models,  the  test  was  conducted  using  a  meta-
-regression approach in which the standard error of the effect size estimate was included as a predictor in 
-the multilevel model (23).
-
-### Equivalence Testing
-When  the  results  of  the  meta-analysis  were  not  statistically  significant,  equivalence  testing  was 
-conducted  using  the  two  one-sided  tests  procedure  implemented  in  the  TOSTER  package  (24)  to 
-determine  whether  pooled  correlations  were  statistically  equivalent  to  zero  within  prespecified 
-equivalence bounds. Because no theoretically justified smallest effect size of interest could be identified, 
-equivalence tests were conducted using bounds corresponding to a small correlation (r = ±0.10) (25). 
-These bounds were converted to Fisher’s z to match the metric used in the meta-analysis. The pooled 
-correlation  was  considered  statistically  equivalent  to  zero  and  practically  negligible  when  the  90% 
-confidence interval of the pooled effect fell entirely within the equivalence bounds.
 
 ```{r install and load dmetar, include=FALSE}
 if (!require("devtools")) {
@@ -129,7 +101,6 @@ library(svglite)
 
 ```
 
-
 *Meta-analysis, Import Pearson r data*
 ```{r import data files, include=FALSE}
 excitability_r  <- read.csv("excitability_r.csv",  header = TRUE, sep = ",")
@@ -164,6 +135,8 @@ facilitation_r$cor_id <- 1:nrow(facilitation_r)
 write.csv(facilitation_r, "facilitation_r.csv", row.names = FALSE)
 unique(facilitation_r)
 ```
+## Meta-Analysis
+### Corticospinal Excitability
 
 *Meta-analysis, Excitability (CSE): Primary analysis of using metafor::rma.mv()*
 ```{r primary excitability meta-analysis RE REML using metafor}
@@ -176,6 +149,14 @@ m.cor.excitability <- rma.mv(yi = z, # pool correlation coefficients Fishers Z t
                 method = "REML")
 summary(m.cor.excitability)
 ```
+
+A total of 20 correlation estimates from 16 studies (600 participants) were included in the meta-
+analysis examining the association between physical activity and corticospinal excitability. The multilevel 
+random-effects  meta-analysis  indicated  no  significant  association  between  physical  activity  and 
+corticospinal excitability (r = −0.03, 95% CI [−0.12, 0.06], p = 0.51) (Fig. 2). The prediction interval 
+ranged from −0.12 to 0.07, indicating that future studies are expected to observe correlations ranging 
+from  small  negative  to  small  positive  values.  Between-study  heterogeneity  was  negligible  (total  I²  = 
+0.15%), with virtually no variance attributable to differences between studies. 
 
 *Meta-analysis, Excitability (CSE): Converting Fisher's z back to Pearson's r*
 ```{r Convert excitability Fisher z back to Pearsons r}
@@ -207,27 +188,6 @@ m.excitability <- metacor(cor = cor,
 m.excitability
 ```
 
-## Meta-Analysis
-### Corticospinal Excitability
-A total of 20 correlation estimates from 16 studies (600 participants) were included in the meta-
-analysis examining the association between physical activity and corticospinal excitability. The multilevel 
-random-effects  meta-analysis  indicated  no  significant  association  between  physical  activity  and 
-corticospinal excitability (r = −0.03, 95% CI [−0.12, 0.06], p = 0.51) (Fig. 2). The prediction interval 
-ranged from −0.12 to 0.07, indicating that future studies are expected to observe correlations ranging 
-from  small  negative  to  small  positive  values.  Between-study  heterogeneity  was  negligible  (total  I²  = 
-0.15%), with virtually no variance attributable to differences between studies. 
-
-To  further  evaluate  whether  the  association  could  be  considered  practically  negligible,  an 
-equivalence test was conducted using equivalence bounds corresponding to a small effect size (−0.10 to 
-0.10).  The  equivalence  test  was  significant  (Z  =  1.66,  p  =  0.049),  and  the  90%  confidence  interval 
-(−0.100 to 0.042) fell entirely within the predefined equivalence bounds, supporting the conclusion that 
-the association between physical activity and corticospinal excitability is negligible.
-
-Subgroup analyses comparing physical activity measures (self-reported vs. device-based) showed no 
-significant difference between measure types (Q = 0.28, p = 0.601). The pooled estimate was −0.05 (95% 
-CI [−0.16, 0.07], k = 14) for self-reported measures and r = 0.00 (95% CI [−0.16, 0.17]; k = 6) for device-
-based measures.
-
 ```{r Forest plot excitability, fig.height=7, fig.width=14}
 forest(m.excitability, 
        layout = "Revman5", 
@@ -238,31 +198,6 @@ forest(m.excitability,
        col.subgroup = "black",
        addrows.below.overall = 2)
 ```
-**Figure 2.** Forest plot of the association between physical activity and corticospinal 
-excitability. Notes: IV = inverse variance, CI = confidence interval.
-
-### Cortical Inhibition
-A total of 18 correlation estimates from 14 studies (610 participants) were included in the meta-
-analysis examining the association between habitual physical activity and measures of cortical inhibition. 
-The multilevel random-effects meta-analysis indicated a significant positive association between physical 
-activity and cortical inhibition (r = 0.02, 95% CI [−0.10, 0.15], p = 0.70) (Fig. 3). The prediction interval 
-ranged from −0.31 to 0.35, indicating that future studies are expected to observe correlations ranging 
-from  moderately  negative  to  moderately  positive  values.  Between-study  heterogeneity  was  moderate 
-(total  I²  of  40.99%),  with  variability  occurring  almost  entirely  between  studies,  with  no  meaningful 
-heterogeneity between effect sizes within studies. 
-The equivalence test was not significant (Z = −1.28, p = 0.100), and the 90% confidence interval 
-(−0.074 to 0.122) extended beyond the predefined equivalence bounds. Thus, equivalence could not be 
-concluded.
-Subgroup analyses examining differences across inhibitory mechanisms (SICI, LICI, cSP, and iSP) 
-revealed statistically significant differences between modulation types (Q = 5.71, p = 0.009) (Fig. 3). The 
-association  was  significant  for  iSP  (r  =  0.47,  95%  CI  [0.21,  0.66];  k  =  2),  whereas  no  significant 
-associations were observed for SICI (r = −0.07, 95% CI [−0.17, 0.04]; k = 13), LICI (r = 0.05, 95% CI 
-[−0.28, 0.37]; k = 1), or cSP (r = 0.14, 95% CI [−0.16, 0.42]; k = 2).
-Subgroup analyses comparing physical activity measures (self-reported vs. device-based) showed no 
-significant difference between measure types (Q = 0.002, p = 0.888). The pooled estimate was r = 0.03 
-(95% CI [−0.11, 0.17]; k = 16) for self-reported measures and −0.01 (95% CI [−0.41, 0.40]; k = 2) for 
-device-based measures.
-
 
 *Excitability (CSE): Save plot*
 ```{r Forest plot excitability export SVG, echo=TRUE}
@@ -284,6 +219,8 @@ dev.off()
 
 ```
 
+### Cortical Inhibition
+
 *Inhibition (SICI, LICI, cSP, iSP): Primary analysis of using metafor::rma.mv()*
 ```{r primary inhibition meta-analysis RE REML using metafor}
 m.cor.inhibition <- rma.mv(yi = z, # pool correlation coefficients Fishers Z transformation https://bookdown.org/mwheymans/bookmi/pooling-correlation-coefficients-1.html
@@ -295,6 +232,15 @@ m.cor.inhibition <- rma.mv(yi = z, # pool correlation coefficients Fishers Z tra
                 method = "REML")
 summary(m.cor.inhibition)
 ```
+
+A total of 18 correlation estimates from 14 studies (610 participants) were included in the meta-
+analysis examining the association between habitual physical activity and measures of cortical inhibition. 
+The multilevel random-effects meta-analysis indicated a significant positive association between physical 
+activity and cortical inhibition (r = 0.02, 95% CI [−0.10, 0.15], p = 0.70) (Fig. 3). The prediction interval 
+ranged from −0.31 to 0.35, indicating that future studies are expected to observe correlations ranging 
+from  moderately  negative  to  moderately  positive  values.  Between-study  heterogeneity  was  moderate 
+(total  I²  of  40.99%),  with  variability  occurring  almost  entirely  between  studies,  with  no  meaningful 
+heterogeneity between effect sizes within studies. 
 
 *Inhibition (SICI, LICI, cSP, iSP): Converting Fisher's z back to Pearson's r*
 ```{r Convert inhibition Fisher z back to Pearsons r}
@@ -360,7 +306,7 @@ dev.off()
 
 ```
 
-
+### Intracortical Facilitation
 *Facilitation (ICF, SICF): Primary analysis of using metafor::rma.mv()*
 ```{r primary facilitation meta-analysis RE REML using metafor}
 m.cor.facilitation <- rma.mv(yi = z, # pool correlation coefficients Fishers Z transformation https://bookdown.org/mwheymans/bookmi/pooling-correlation-coefficients-1.html
@@ -372,6 +318,16 @@ m.cor.facilitation <- rma.mv(yi = z, # pool correlation coefficients Fishers Z t
                 method = "REML")
 summary(m.cor.facilitation)
 ```
+
+A  total  of  14  correlation  estimates  from  8  studies  (412  participants)  were  included  in  the  meta-
+analysis  examining  the  association  between  habitual  physical  activity  and  TMS  measures  of  cortical 
+facilitation. The multilevel random-effects meta-analysis indicated no statistically significant association 
+between  physical  activity  and  cortical  facilitation  (r  =  0.07,  95%  CI  [−0.04,  0.18],  p  =  0.22).  The 
+prediction interval ranged from −0.04 to 0.18, indicating that future studies would be expected to observe 
+correlations ranging from slightly negative to small positive values. No meaningful heterogeneity was 
+observed across studies (I² = 0%), indicating that variability in the observed correlations was entirely 
+attributable to sampling error. Variance decomposition confirmed that neither between-study nor within-
+study variance components contributed meaningfully to heterogeneity.
 
 *Facilitation (ICF, SICF): Converting Fisher's z back to Pearson's r*
 ```{r Convert facilitation Fisher z back to Pearsons r}
@@ -403,6 +359,7 @@ m.facilitation <- metacor(cor = cor,
 m.facilitation
 ```
 
+
 *Cortical Facilitation*
 *Facilitation (ICF, SICF): Forest plot*
 ```{r Forest plot facilitation, fig.height=7, fig.width=14}
@@ -415,31 +372,6 @@ forest(m.facilitation,
        col.subgroup = "black",
        addrows.below.overall = 2)
 ```
-**Figure 3.** Forest plot of the association between habitual physical activity and TMS 
-measures of cortical inhibition. Notes: SICI = short-interval intracortical inhibition, LICI = 
-long-interval intracortical inhibition, cSP = cortical silent period, iSP = ipsilateral silent 
-period, IV = inverse variance, CI = confidence interval.
-
-### Intracortical Facilitation
-A  total  of  14  correlation  estimates  from  8  studies  (412  participants)  were  included  in  the  meta-
-analysis  examining  the  association  between  habitual  physical  activity  and  TMS  measures  of  cortical 
-facilitation. The multilevel random-effects meta-analysis indicated no statistically significant association 
-between  physical  activity  and  cortical  facilitation  (r  =  0.07,  95%  CI  [−0.04,  0.18],  p  =  0.22).  The 
-prediction interval ranged from −0.04 to 0.18, indicating that future studies would be expected to observe 
-correlations ranging from slightly negative to small positive values. No meaningful heterogeneity was 
-observed across studies (I² = 0%), indicating that variability in the observed correlations was entirely 
-attributable to sampling error. Variance decomposition confirmed that neither between-study nor within-
-study variance components contributed meaningfully to heterogeneity.
-The equivalence test was not significant (Z = −0.63, p = 0.263), and the 90% confidence interval 
-(−0.018 to 0.153) extended beyond the predefined equivalence bounds. Thus, equivalence could not be 
-concluded.
-Subgroup analyses comparing facilitatory measures (ICF vs. SICF) showed no significant difference 
-between measure types (Q = 0.002, p = 0.966) (Fig. 4). Point estimates were similar for ICF (r = 0.07, 
-95% CI [−0.07, 0.21]; k = 9) and SICF (r = 0.06, 95% CI [−0.13, 0.25]; k = 5).
-Subgroup analyses comparing physical activity measures (self-reported vs. device-based) showed no 
-significant difference between measure types (Q = 0.59, p = 0.458). The pooled estimate for self-reported 
-measures was r = 0.08 (95% CI [−0.04, 0.20]; k = 13), whereas only one study and there was only a single 
-study using a device-based measure (r = −0.05, 95% CI [−0.37, 0.29]; k = 1).
 
 
 ```{r Forest plot facilitation export SVG, echo=TRUE}
@@ -461,6 +393,11 @@ dev.off()
 
 ```
 
+### Subgroup Meta-Analyses 
+Subgroup analyses were conducted to examine whether pooled correlations differed across types of 
+inhibitory (SICI, LICI, cSP, and iSP) and facilitatory measures (ICF and SICF), as well as by physical 
+activity assessment method (self-reported vs. device-based).
+
 *Meta-analysis: Subgroup analyses*
 *Inhibition measure*
 ```{r Subgroup analysis by inhibitory measure using metafor}
@@ -477,6 +414,12 @@ inhibition_tms_subg <- rma.mv(yi = z,
 
 summary(inhibition_tms_subg)
 ```
+
+Subgroup analyses examining differences across inhibitory mechanisms (SICI, LICI, cSP, and iSP) 
+revealed statistically significant differences between modulation types (Q = 5.71, p = 0.009) (Fig. 3). The 
+association  was  significant  for  iSP  (r  =  0.47,  95%  CI  [0.21,  0.66];  k  =  2),  whereas  no  significant 
+associations were observed for SICI (r = −0.07, 95% CI [−0.17, 0.04]; k = 13), LICI (r = 0.05, 95% CI 
+[−0.28, 0.37]; k = 1), or cSP (r = 0.14, 95% CI [−0.16, 0.42]; k = 2).
 
 ```{r inhibition by measure type meta, warning=FALSE}
 inhibition_measure_type <- update(m.inhibition, subgroup = inhibitory.measure, tau.common = TRUE)
@@ -529,6 +472,11 @@ facilitation_type <- rma.mv(yi = z,
 
 summary(facilitation_type)
 ```
+
+Subgroup analyses comparing facilitatory measures (ICF vs. SICF) showed no significant difference 
+between measure types (Q = 0.002, p = 0.966) (Fig. 4). Point estimates were similar for ICF (r = 0.07, 
+95% CI [−0.07, 0.21]; k = 9) and SICF (r = 0.06, 95% CI [−0.13, 0.25]; k = 5).
+
 ```{r facilitation type meta, warning=FALSE}
 facilitation_measure_type <- update(m.facilitation, subgroup = facilitatory.measure, tau.common = TRUE)
 facilitation_measure_type
@@ -580,10 +528,18 @@ excitability_PA_type <- rma.mv(yi = z,
 
 summary(excitability_PA_type)
 ```
+
+
+Subgroup analyses comparing physical activity measures (self-reported vs. device-based) showed no 
+significant difference between measure types (Q = 0.28, p = 0.601). The pooled estimate was −0.05 (95% 
+CI [−0.16, 0.07], k = 14) for self-reported measures and r = 0.00 (95% CI [−0.16, 0.17]; k = 6) for device-
+based measures.
+
 ```{r excitability PA type meta, warning=FALSE}
 excitability_PA_type <- update(m.excitability, subgroup = PA_objectivity, tau.common = TRUE)
 excitability_PA_type
 ```
+
 ```{r Forest plot by physical activity objectivity for excitability using meta, fig.height=7, fig.width=14}
 
 forest(excitability_PA_type, 
@@ -631,6 +587,13 @@ inhibition_PA_type <- rma.mv(yi = z,
 
 summary(inhibition_PA_type)
 ```
+
+Subgroup analyses comparing physical activity measures (self-reported vs. device-based) showed no 
+significant difference between measure types (Q = 0.002, p = 0.888). The pooled estimate was r = 0.03 
+(95% CI [−0.11, 0.17]; k = 16) for self-reported measures and −0.01 (95% CI [−0.41, 0.40]; k = 2) for 
+device-based measures.
+
+
 ```{r inhibition PA type meta, warning=FALSE}
 inhibition_PA_type <- update(m.inhibition, subgroup = PA_objectivity, tau.common = TRUE)
 inhibition_PA_type
@@ -682,6 +645,12 @@ facilitation_PA_type <- rma.mv(yi = z,
 
 summary(facilitation_PA_type)
 ```
+
+Subgroup analyses comparing physical activity measures (self-reported vs. device-based) showed no 
+significant difference between measure types (Q = 0.59, p = 0.458). The pooled estimate for self-reported 
+measures was r = 0.08 (95% CI [−0.04, 0.20]; k = 13), whereas only one study and there was only a single 
+study using a device-based measure (r = −0.05, 95% CI [−0.37, 0.29]; k = 1).
+
 ```{r facilitation PA type meta, warning=FALSE}
 facilitation_PA_type <- update(m.facilitation, subgroup = PA_objectivity, tau.common = TRUE)
 facilitation_PA_type
@@ -717,6 +686,12 @@ forest(facilitation_PA_type,
 dev.off()
 
 ```
+
+
+### Meta-Regressions
+Meta-regression analyses were conducted to examine whether study-level characteristics, including 
+mean age and proportion of women were associated with the reported correlations. A  sensitivity  analysis  was  conducted  to  examine  whether  the  quality  of  the  studies  affected  the 
+results. 
 
 *Meta Regressions*
 *Excitability*
@@ -776,6 +751,20 @@ m.cor.reg.facilitation.quality <- metareg(m.facilitation, ~Q_score)
 m.cor.reg.facilitation.quality
 ```
 
+Meta-regression analyses indicated that the association between physical activity and TMS measures 
+was not significantly moderated by the proportion of women, mean participant age, or study quality (all p 
+≥ 0.105).
+
+### Equivalence Testing
+When  the  results  of  the  meta-analysis  were  not  statistically  significant,  equivalence  testing  was 
+conducted  using  the  two  one-sided  tests  procedure  implemented  in  the  TOSTER  package  (24)  to 
+determine  whether  pooled  correlations  were  statistically  equivalent  to  zero  within  prespecified 
+equivalence bounds. Because no theoretically justified smallest effect size of interest could be identified, 
+equivalence tests were conducted using bounds corresponding to a small correlation (r = ±0.10) (25). 
+These bounds were converted to Fisher’s z to match the metric used in the meta-analysis. The pooled 
+correlation  was  considered  statistically  equivalent  to  zero  and  practically  negligible  when  the  90% 
+confidence interval of the pooled effect fell entirely within the equivalence bounds.
+
 *Equivalence Testing*
 *Excitability*
 ```{r Equivalence testing excitability}
@@ -796,6 +785,12 @@ TOSTmeta(
 )
 ```
 
+To  evaluate  whether  the  association  could  be  considered  practically  negligible,  an 
+equivalence test was conducted using equivalence bounds corresponding to a small effect size (−0.10 to 
+0.10).  The  equivalence  test  was  significant  (Z  =  1.66,  p  =  0.049),  and  the  90%  confidence  interval 
+(−0.100 to 0.042) fell entirely within the predefined equivalence bounds, supporting the conclusion that 
+the association between physical activity and corticospinal excitability is negligible.
+
 *Inhibition*
 ```{r Equivalence testing inhibition}
 
@@ -815,6 +810,10 @@ TOSTmeta(
 )
 ```
 
+The equivalence test was not significant (Z = −1.28, p = 0.100), and the 90% confidence interval 
+(−0.074 to 0.122) extended beyond the predefined equivalence bounds. Thus, equivalence could not be 
+concluded.
+
 *Facilitation*
 ```{r Equivalence testing facilitation}
 
@@ -833,6 +832,19 @@ TOSTmeta(
   alpha = 0.05
 )
 ```
+
+The equivalence test was not significant (Z = −0.63, p = 0.263), and the 90% confidence interval 
+(−0.018 to 0.153) extended beyond the predefined equivalence bounds. Thus, equivalence could not be 
+concluded.
+
+### Publication Bias
+Potential publication bias and small-study effects were assessed using contour-enhanced funnel plots 
+and Egger’s regression tests. Funnel plots display the Fisher’s z-transformed correlations against their 
+standard errors to allow visual inspection of asymmetry around the pooled effect size. Egger’s regression 
+test  was  used  as  a  statistical  complement  to  the  visual  inspection  of  funnel  plots.  Because  no  direct 
+implementation  exists  for  multilevel  meta-analytic  models,  the  test  was  conducted  using  a  meta-
+regression approach in which the standard error of the effect size estimate was included as a predictor in 
+the multilevel model (23).
 
 *Publication bias analysis*
 *Small-study effects*
@@ -927,17 +939,7 @@ test.egger
 test.egger = rma.mv(z,var.z, mod = ~ sqrt(var.z), random =  ~ 1 | author/cor_id, data = facilitation_r, test = "t")
 test.egger
 ```
-**Figure 4.** Forest plot of the association between habitual physical activity and 
-transcranial magnetic stimulation measures of intracortical facilitation. Notes: ICF = 
-intracortical facilitation, SICF = short-interval intracortical facilitation, IV = inverse 
-variance, CI = confidence interval.
 
-### Meta-Regressions
-Meta-regression analyses indicated that the association between physical activity and TMS measures 
-was not significantly moderated by the proportion of women, mean participant age, or study quality (all p 
-≥ 0.105).
-
-### Publication Bias
 Potential publication bias and small-study effects were assessed using contour-enhanced funnel plots 
 and Egger’s regression tests. Visual inspection of the funnel plots for corticospinal excitability, cortical 
 inhibition, and cortical facilitation did not reveal substantial asymmetry around the pooled effect sizes.
