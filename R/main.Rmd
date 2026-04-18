@@ -301,7 +301,7 @@ exclusion at each stage are provided in the PRISMA flow diagram (Fig. 1). The me
 scores of the included studies ranged from 11 to 18 out of 28 (mean ± standard deviation of 13.7 ± 1.9) 
 (Table 1).
 
-*Figure 1. is accessible on the offical publication.*
+*Figure 1. is accessible on the official publication.*
 
 ## Descriptive Results
 ### Participants
@@ -337,7 +337,7 @@ provided raw data for CSE (11, 31–36, 38–41,43), nine for SICI (11, 32, 34�
 (43), six for ICF (11, 34–37, 43), and two for and SICF (11, 35). In four studies, correlation coefficients 
 were computed from p values or t-statistics) and sample sizes for SICI (10, 28), ICF (28); SICF (28), cSP 
 (10), and iSP (26, 27).
-Overall, the meta-analysis included twenty Pearson's r correlation coefficients for CSE derived from 
+Overall, the meta-analysis included twenty Pearson’s r correlation coefficients for CSE derived from 
 fourteen studies (11, 29–36, 38–41, 43), thirteen for SICI from eleven studies (10, 11, 28, 32, 34–36, 
 40–43), eight for ICF from seven studies (11, 28, 34–37, 43), five for SICF from three studies (11, 28, 
 35), two for iSP (26, 27) and two for cSP (10, 29) (Table 1).
@@ -495,8 +495,8 @@ transcranial magnetic stimulation measures of intracortical facilitation. Notes:
 intracortical facilitation, SICF = short-interval intracortical facilitation, IV = inverse 
 variance, CI = confidence interval.
 
-# Meta-analysis: Subgroup analyses
-## Inhibition
+*Meta-analysis: Subgroup analyses*
+*Inhibition*
 ```{r Subgroup analysis by inhibitory measure using metafor}
 inhibition_tms_subg <- run_subgroup_analysis_metafor(inhibition_r, "inhibitory.measure")
 summary(inhibition_tms_subg)
@@ -508,6 +508,7 @@ inhibition_measure_type
 ```{r Forest plot for inhibition type using meta, fig.height=10, fig.width=14}
 create_forest_plot(inhibition_measure_type)
 ```
+
 *Inhibition measure type: Save plot*
 ```{r Forest plot inhibition type export SVG, echo=TRUE}
 save_forest_plot_svg(inhibition_measure_type, "forest_plot_inhibition-measure", height = 10, width = 14)
@@ -652,22 +653,22 @@ was not significantly moderated by the proportion of women, mean participant age
 ≥ 0.105).
 
 ### Publication Bias
-       Potential publication bias and small-study effects were assessed using contour-enhanced funnel plots 
-and Egger's regression tests. Visual inspection of the funnel plots for corticospinal excitability, cortical 
+Potential publication bias and small-study effects were assessed using contour-enhanced funnel plots 
+and Egger’s regression tests. Visual inspection of the funnel plots for corticospinal excitability, cortical 
 inhibition, and cortical facilitation did not reveal substantial asymmetry around the pooled effect sizes.
-       Egger's  regression  tests  conducted  using  the  meta-regression  approach  were  not  statistically 
+Egger’s  regression  tests  conducted  using  the  meta-regression  approach  were  not  statistically 
 significant  for  any  of  the  meta-analyses.  The  regression  coefficient  for  the  standard  error  was  not 
 significant for corticospinal excitability (p = 0.86), cortical inhibition (p = 0.71), or cortical facilitation (p 
 = 0.16). These results indicate that smaller studies did not systematically report larger effect sizes.
 
 # Discussion
 ## Main findings
-       This  systematic  review  and  meta-analysis  examined  the  association  between  habitual  physical 
+This  systematic  review  and  meta-analysis  examined  the  association  between  habitual  physical 
 activity  and  motor  cortical  physiology  assessed  using  transcranial  magnetic  stimulation.  The  results 
 revealed no reliable associations across neurophysiological measures. Specifically, physical activity was 
 not  statistically  associated  with  corticospinal  excitability  and  showed  no  evidence  of  association  with 
 cortical inhibition or intracortical facilitation.
-       Specifically,  for  corticospinal  excitability,  the  pooled  correlation  was  close  to  zero,  with  narrow 
+Specifically,  for  corticospinal  excitability,  the  pooled  correlation  was  close  to  zero,  with  narrow 
 confidence  intervals  and  negligible  heterogeneity.  Equivalence  testing  further  demonstrated  that  this 
 effect was statistically equivalent to zero, providing evidence that habitual physical activity is unlikely to 
 be meaningfully associated with corticospinal excitability. For cortical inhibition, the pooled association 
@@ -680,18 +681,18 @@ the pooled correlation was small and non-significant, with no observed heterogen
 indicated that the effect could not be considered statistically equivalent to zero. Consequently, while the 
 available  evidence  does  not  support  a  meaningful  relationship  between  habitual  physical  activity  and 
 cortical facilitation, small effects cannot be ruled out.
-       Taken together, these findings suggest that habitual physical activity is not reliably associated with 
+Taken together, these findings suggest that habitual physical activity is not reliably associated with 
 motor cortical physiology. Any potential relationships appear to be small, inconsistent, and dependent on 
 specific inhibitory mechanisms rather than reflecting a global effect across motor cortical systems
 
 ## Acute exercise versus habitual physical activity effects on motor cortical physiology
-       A  recent  meta-analysis  demonstrated  that  a  single  bout  of  acute  aerobic  exercise  transiently 
+A  recent  meta-analysis  demonstrated  that  a  single  bout  of  acute  aerobic  exercise  transiently 
 modulates motor cortical physiology (6). Specifically, acute aerobic exercise produced a small increase in 
 SICI  (g  =  0.27),  with  stronger  effects  observed  at  moderate  and  high  exercise  intensities,  and  these 
 changes persisted for up to 30 minutes following exercise. In contrast, increases in CSE were observed 
 only following high-intensity exercise and were generally small in magnitude, while effects on ICF and 
 LICI were not statistically significant. 
-       In  comparison,  the  present  meta-analysis  of  habitual  physical  activity  revealed  no  reliable 
+In  comparison,  the  present  meta-analysis  of  habitual  physical  activity  revealed  no  reliable 
 associations  with  CSE,  cortical  inhibition,  or  cortical  facilitation.  Notably,  CSE  was  statistically 
 equivalent  to  zero,  indicating  that  the  transient  increases  observed  following  acute  exercise  do  not 
 translate into persistent differences in corticospinal output. For inhibitory processes, although no overall 
@@ -700,7 +701,7 @@ appeared to be driven by specific mechanisms, with iSP showing a significant pos
 contrast to the absence of effects for SICI, cSP, and LICI. Facilitation (ICF/SICF) similarly showed no 
 significant or equivalent effects, suggesting that any relationship with habitual physical activity is likely 
 small or inconsistent.
-       Together, these findings suggest a dissociation between the transient neurophysiological effects of 
+Together, these findings suggest a dissociation between the transient neurophysiological effects of 
 acute  exercise  and  the  absence  of  consistent  long-term  adaptations  associated  with  habitual  physical 
 activity. Acute exercise appears to induce short-lived modulation of motor cortical circuits, particularly within  inhibitory  networks,  whereas  habitual  physical  activity  is  not  associated  with  stable,  global 
 changes  in  motor  cortical  physiology.  Instead,  any  long-term  adaptations  may  be  subtle,  context-
