@@ -5,7 +5,7 @@
 
 ## Description
 
-Code and data for the article: "Physical activity and motor cortex neurophysiology: a systematic review and meta-analysis of transcranial magnetic stimulation indices of cortical excitability, inhibition, and facilitation"
+Code and data for the article: "Physical activity and motor cortical neurophysiology: a meta-analysis"
 
 ## Usage
 
