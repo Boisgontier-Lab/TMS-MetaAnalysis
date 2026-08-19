@@ -15,5 +15,4 @@ Code and data for the article: "Physical activity and motor cortex neurophysiolo
 ## File Structure
 
 - `data/` : Raw and processed data used for analyses (CSV files: `excitability.csv`, `facilitation.csv`, `inhibition.csv`). This folder also includes `Farajzadeh_2026_PhysicalActivity-TMS.csv`, which is the dataset collected by our own laboratory and refered to as "Farajzadeh A. 2026. Dataset physical activity and TMS." in the reference list of the article.
-- `manuscript/` : Submission file
 - `R/` : R scripts for package installation, preprocessing, analysis, figure generation, and the main document `main.Rmd`.
