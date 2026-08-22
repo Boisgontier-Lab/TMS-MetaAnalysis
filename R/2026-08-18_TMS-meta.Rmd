@@ -500,7 +500,7 @@ excitability_PA_type
 ```
 
 
-```{r Forest plot by physical activity objectivity for excitability using meta, fig.height=8, fig.width=14}
+```{r Forest plot by physical activity objectivity for excitability using meta, fig.height=10, fig.width=14}
 
 forest(excitability_PA_type, 
        layout = "Revman5", 
@@ -863,8 +863,8 @@ meta::funnel(m.excitability,
 
 # legend
 legend(x =0.5, y = 0.01, 
-       legend = c("p < 0.05", "p < 0.01"),
-       fill = col.contour)
+       legend = c("p ≥ 0.05", "p < 0.05", "p < 0.01"),
+      fill = c("white", col.contour))
 
 # title
 title("Contour-Enhanced Funnel Plot (excitability)")
@@ -882,8 +882,8 @@ meta::funnel(m.inhibition,
 
 # legend
 legend(x =0.5, y = 0.01, 
-       legend = c("p < 0.05", "p < 0.01"),
-       fill = col.contour)
+       legend = c("p ≥ 0.05", "p < 0.05", "p < 0.01"),
+      fill = c("white", col.contour))
 
 # title
 title("Contour-Enhanced Funnel Plot (inhibition)")
@@ -904,8 +904,8 @@ meta::funnel(m.inhibition,
 
 # legend
 legend(x =0.5, y = 0.01, 
-       legend = c("p < 0.05", "p < 0.01"),
-       fill = col.contour)
+       legend = c("p ≥ 0.05", "p < 0.05", "p < 0.01"),
+      fill = c("white", col.contour))
 
 # title
 title("Contour-Enhanced Funnel Plot (tms and Physical Activity)")
@@ -925,8 +925,8 @@ meta::funnel(m.facilitation,
 
 # legend
 legend(x =0.5, y = 0.01, 
-       legend = c("p < 0.05", "p < 0.01"),
-       fill = col.contour)
+       legend = c("p ≥ 0.05", "p < 0.05", "p < 0.01"),
+      fill = c("white", col.contour))
 
 # title
 title("Contour-Enhanced Funnel Plot (facilitation)")
