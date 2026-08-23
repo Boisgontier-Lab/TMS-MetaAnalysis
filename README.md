@@ -5,7 +5,7 @@
 
 ## Description
 
-Code and data for the article: "Physical activity and motor cortical neurophysiology: a meta-analysis"
+Code and data for the article: "Habitual physical activity and motor cortical neurophysiology: a systematic review with meta-analyses of transcranial magnetic stimulation measures"
 
 ## File Structure
 
