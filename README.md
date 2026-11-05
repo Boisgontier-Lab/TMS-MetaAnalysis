@@ -1,7 +1,7 @@
 # TMS-MetaAnalysis
 **Authors:** Ata Farajzadeh, Ian M. Lahart, Matthieu P. Boisgontier
 
-**Contacts:** ata.farajzadeh@uottawa.ca, matthieu.boisgontier@uottawa.ca
+**Contact:** matthieu.boisgontier@uottawa.ca
 
 ## Description
 
